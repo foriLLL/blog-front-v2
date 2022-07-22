@@ -1,8 +1,20 @@
-import '../styles/globals.css'
+import style from '@/styles/frame.module.sass'
 import type { AppProps } from 'next/app'
+import '@/styles/globals.css'
+import Sider from '@/components/Sider'
+import Header from '@/components/Header'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <div className={style.frame}>
+      <div className={style.frameLeft}>
+        <Sider />
+      </div>
+      <div className={style.frameRight}>
+        <Header />
+        <Component {...pageProps} />
+      </div>
+    </div>)
 }
 
 export default MyApp
