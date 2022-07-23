@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '@/styles/Home.module.sass'
+import PostList from '@/components/PostList'
 
 const Home: NextPage = () => {
     return (
@@ -12,7 +13,7 @@ const Home: NextPage = () => {
             </Head>
 
             <main className={styles.main}>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, totam qui enim sit, nobis reiciendis reprehenderit ad vitae provident asperiores rem consequuntur alias saepe quibusdam. Hic omnis enim expedita doloremque?
+              <PostList />
             </main>
         </>
     )

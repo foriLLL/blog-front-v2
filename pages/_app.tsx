@@ -1,6 +1,6 @@
 import style from '@/styles/frame.module.sass'
 import type { AppProps } from 'next/app'
-import '@/styles/globals.css'
+import '@/styles/globals.sass'
 import Sider from '@/components/Sider'
 import Header from '@/components/Header'
 
