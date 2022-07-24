@@ -6,7 +6,7 @@ const withAntdLess = require('next-plugin-antd-less');
 const pluginAntdLess = withAntdLess({
   // @ts-ignore
   modifyVars: {
-    '@primary-color': 'red',
+    '@primary-color': '#8838c5',
     '@menu-dark-bg': '#ccc'
   }
 });
