@@ -6,7 +6,6 @@ import { baseURL } from './config'
 export const getAllArticleCates:(()=>Promise<ArticleCate[]>) = async () => {
   const res:AxiosResponse<ResBody<ArticleCate[]>> = await axios.get(baseURL+"/api/articleCate");
   if(res.data && res.data.ifSuccessful){
-    console.log("*".repeat(20))
     return res.data.data;
   }else{
     return [];
