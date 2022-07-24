@@ -1,6 +1,27 @@
 .headerContainer
-  background-color: #0b0
+  width: 100%
+  height: 3.5rem
+  display: flex
+  justify-content: space-between
+  background-color: var(--sider-bg-color)
 
 @media (min-width:768px)
   .headerContainer
     display: none
+
+.navigator
+  flex-basis: 100%
+
+.headerInfo
+  background-color: var(--sider-bg-color)
+  max-height: 100%
+  display: flex
+  flex-basis: 100px
+  flex-shrink: 0
+  align-items: center
+  img
+    height: 70%
+    border-radius: 50%
+  h2
+    line-height: 3.5rem
+    margin: 0 12px

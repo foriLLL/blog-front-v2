@@ -1,3 +1,10 @@
+/* Sider */
 .ant-menu-inline{
   border-right: 0px !important;
+}
+
+/* Header */
+.ant-menu-horizontal{
+  line-height: 3.5rem !important;
+  width: 100%;
 }
