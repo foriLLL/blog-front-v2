@@ -8,6 +8,7 @@ specifiers:
   antd: ^4.21.7
   axios: ^0.27.2
   babel-plugin-import: ^1.13.5
+  dayjs: ^1.11.4
   eslint: 8.20.0
   eslint-config-next: 12.2.2
   next: 12.2.2
@@ -22,6 +23,7 @@ dependencies:
   '@ant-design/icons': registry.npmmirror.com/@ant-design/icons/4.7.0_biqbaboplfbrettd7655fr4n2y
   antd: registry.npmmirror.com/antd/4.21.7_biqbaboplfbrettd7655fr4n2y
   axios: registry.npmmirror.com/axios/0.27.2
+  dayjs: registry.npmmirror.com/dayjs/1.11.4
   next: registry.npmmirror.com/next/12.2.2_b7sksnfkdyiidz7vzaadim75qm
   next-plugin-antd-less: registry.npmmirror.com/next-plugin-antd-less/1.8.0
   react: registry.npmmirror.com/react/18.2.0

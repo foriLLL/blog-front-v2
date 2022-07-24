@@ -25,7 +25,7 @@ export default class PostList extends Component<{}, IState> {
   render() {
     const { articleInfos } = this.state;
     return (
-      <div className={style.container}>{articleInfos.map(info => (<PostItem articleInfo={info} />))}</div>
+      <div className={style.container}>{articleInfos.map(info => (<PostItem key={info.articleId} articleInfo={info} />))}</div>
     )
   }
 }
