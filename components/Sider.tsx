@@ -12,15 +12,13 @@ interface IProps {
 interface IState {
   ifDarkTheme: boolean
   articleCates: ArticleCate[]
-  selectedKeys: string[]
 }
 class Sider extends React.Component<IProps, IState>{
   constructor(props: IProps) {
     super(props)
     this.state = {
       ifDarkTheme: false,
-      articleCates: [],
-      selectedKeys: [this.props.router.pathname]
+      articleCates: []
     }
   }
 
@@ -31,15 +29,8 @@ class Sider extends React.Component<IProps, IState>{
     })
   }
 
-  refreshSelected: MenuProps["onClick"] = (e) => {
-    this.setState({
-      selectedKeys: [e.key]
-    })
-  }
-
   render() {
     const { articleCates } = this.state;
-    const { selectedKeys } = this.state
     const items = [
       { label: <Link href={"/"}><a>首页</a></Link>, key: '/' }, // 菜单项务必填写 key
       {
@@ -70,7 +61,7 @@ class Sider extends React.Component<IProps, IState>{
           </Link>
         </div>
         <div className={style.menu}>
-          <Menu onClick={this.refreshSelected} items={items} mode='inline' theme='light' defaultOpenKeys={['cate']} selectedKeys={selectedKeys} />
+          <Menu items={items} mode='inline' theme='light' defaultOpenKeys={['cate']} selectedKeys={[this.props.router.pathname]} />
         </div>
       </div>
     )
