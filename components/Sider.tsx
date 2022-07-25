@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import style from "@/styles/components/Sider.module.sass"
 import Link from 'next/link';
 import { Menu, MenuProps } from 'antd';
