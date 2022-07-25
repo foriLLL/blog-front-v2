@@ -59,7 +59,7 @@ class Sider extends React.Component<{}, IState>{
           </Link>
         </div>
         <div className={style.menu}>
-          <Menu items={items} mode='inline' theme='light' defaultOpenKeys={['cate']} />
+          <Menu items={items} mode='inline' theme='light' />
         </div>
       </div>
     )
