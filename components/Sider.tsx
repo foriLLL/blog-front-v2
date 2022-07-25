@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import style from "@/styles/components/Sider.module.sass"
 import Link from 'next/link';
-import { Menu } from 'antd';
+import { Menu, MenuProps } from 'antd';
 import ArticleCate from '@/types/ArticleCate';
 import { getAllArticleCates } from '@/api/articleCateApi';
+import { Router, withRouter } from 'next/router'
 
+interface IProps {
+  router: Router
+}
 interface IState {
   ifDarkTheme: boolean
   articleCates: ArticleCate[]
+  selectedKeys: string[]
 }
-class Sider extends React.Component<{}, IState>{
-  constructor(props: {}) {
+class Sider extends React.Component<IProps, IState>{
+  constructor(props: IProps) {
     super(props)
     this.state = {
       ifDarkTheme: false,
-      articleCates: []
+      articleCates: [],
+      selectedKeys: [this.props.router.pathname]
     }
   }
 
@@ -25,21 +31,26 @@ class Sider extends React.Component<{}, IState>{
     })
   }
 
-
+  refreshSelected: MenuProps["onClick"] = (e) => {
+    this.setState({
+      selectedKeys: [e.key]
+    })
+  }
 
   render() {
-    const {articleCates} = this.state;
+    const { articleCates } = this.state;
+    const { selectedKeys } = this.state
     const items = [
-      { label: '首页', key: 'index' }, // 菜单项务必填写 key
+      { label: <Link href={"/"}><a>首页</a></Link>, key: '/' }, // 菜单项务必填写 key
       {
         label: '分类',
         key: 'cate',
         children: articleCates.map(cate => ({
-          label: cate.cateName,
-          key: cate.cateId
+          label: <Link href={`/cate/${cate.cateId}`}><a>{cate.cateName}</a></Link>,
+          key: `/cate/${cate.cateId}`
         })),
       },
-      { label: '关于', key: 'about' },
+      { label: <Link href={"/about"}><a>关于</a></Link>, key: "/about" },
     ];
     return (
       <div className={style.container}>
@@ -59,11 +70,11 @@ class Sider extends React.Component<{}, IState>{
           </Link>
         </div>
         <div className={style.menu}>
-          <Menu items={items} mode='inline' theme='light' />
+          <Menu onClick={this.refreshSelected} items={items} mode='inline' theme='light' defaultOpenKeys={['cate']} selectedKeys={selectedKeys} />
         </div>
       </div>
     )
   }
 }
 
-export default Sider
+export default withRouter(Sider);
