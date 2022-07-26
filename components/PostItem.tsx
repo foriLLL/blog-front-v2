@@ -35,7 +35,6 @@ export default class PostItem extends Component<IProps> {
               }
               <div className={style.description}>{articleInfo.description}</div>
             </div>
-            <Divider style={{ margin: '6px 0' }} />
             <div className={style.tail}>
               <div className={style.time}>
                 {dayjs(articleInfo.time).fromNow()}
