@@ -1,22 +1,28 @@
 import { getAllArticleInfosByCateId } from '@/api/articleInfoApi';
 import ArticleInfo from '@/types/ArticleInfo'
 import Head from 'next/head'
-import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/router';
+import React from 'react'
 import PostList from '@/components/PostList';
-import { NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 
-const CateList: NextPage = () => {
-  const [articleInfos, setArticleInfos] = useState<ArticleInfo[]>([]);
-  const router = useRouter();
-  const { cateId } = router.query;
-  useEffect(() => {
-    if (!cateId) return;
-    
-    getAllArticleInfosByCateId(cateId as string).then(data => {
-      setArticleInfos(data)
-    });
-  }, [cateId])
+interface IProps {
+  articleInfos: ArticleInfo[]
+}
+export const getServerSideProps: GetServerSideProps<IProps> = async (context) => {
+  const cateIdStr = context.params && context.params.cateId;
+  if (typeof (cateIdStr) !== 'string' || parseInt(cateIdStr)===NaN) {
+    return { notFound: true }
+  }else{
+    const infos: ArticleInfo[] = await getAllArticleInfosByCateId(parseInt(cateIdStr))
+    return {
+      props:{
+        articleInfos: infos
+      }
+    }
+  }
+
+}
+const CateList: NextPage<IProps> = (props:IProps) => {
 
   return (
     <>
@@ -25,9 +31,8 @@ const CateList: NextPage = () => {
         <meta name="description" content="foriL的个人博客" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <main>
-        <PostList articleInfos={articleInfos} />
+        <PostList articleInfos={props.articleInfos} />
       </main>
     </>
   )

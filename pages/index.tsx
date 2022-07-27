@@ -3,27 +3,22 @@ import Head from 'next/head'
 import PostList from '@/components/PostList'
 import ArticleInfo from '@/types/ArticleInfo'
 import { getAllArticleInfos } from '@/api/articleInfoApi'
+import { GetServerSideProps } from 'next';
 
-interface IState{
+interface IProps{
   articleInfos: ArticleInfo[]
 }
-class Home extends React.Component<{}, IState> {
-  constructor(props: {}){
-    super(props);
-    this.state = {
-      articleInfos: []
+export const getServerSideProps: GetServerSideProps =  async (context)=>{
+  const articleInfos = await getAllArticleInfos();
+  return {
+    props:{
+      articleInfos
     }
   }
-
-  async componentDidMount(){
-    const articleInfos: ArticleInfo[] = await getAllArticleInfos()
-    this.setState({
-      articleInfos
-    })
-  }
-
+}
+class Home extends React.Component<IProps> {
   render() {
-    const {articleInfos} = this.state;
+    const {articleInfos} = this.props;
     return (
       <>
         <Head>
