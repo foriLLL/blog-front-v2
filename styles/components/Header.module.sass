@@ -1,9 +1,11 @@
+$header-height: 3.5rem
 .headerContainer
   width: 100%
-  height: 3.5rem
   display: flex
+  height: $header-height
   justify-content: space-between
   background-color: var(--sider-bg-color)
+  border-bottom: 1px solid #f0f0f0
 
 @media (min-width:768px)
   .headerContainer
@@ -20,8 +22,7 @@
   flex-shrink: 0
   align-items: center
   img
-    height: 70%
+    height: $header-height * 0.6
     border-radius: 50%
   h2
-    line-height: 3.5rem
     margin: 0 12px

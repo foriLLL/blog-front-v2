@@ -7,4 +7,5 @@
 .ant-menu-horizontal{
   line-height: 3.5rem !important;
   width: 100%;
+  border-bottom: 0px !important
 }

@@ -4,18 +4,22 @@ import '@/styles/globals.sass'
 import '@/styles/antd-customized.css'
 import Sider from '@/components/Sider'
 import Header from '@/components/Header'
+import zhCN from 'antd/lib/locale/zh_CN';
+import { ConfigProvider } from 'antd'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className={style.frame}>
-      <div className={style.frameLeft}>
-        <Sider />
+    <ConfigProvider locale={zhCN}>
+      <div className={style.frame}>
+        <div className={style.frameLeft}>
+          <Sider />
+        </div>
+        <div className={style.frameRight}>
+          <Header />
+          <Component {...pageProps} />
+        </div>
       </div>
-      <div className={style.frameRight}>
-        <Header />
-        <Component {...pageProps} />
-      </div>
-    </div>)
+    </ConfigProvider>)
 }
 
 export default MyApp
