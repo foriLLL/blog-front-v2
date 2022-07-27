@@ -16,7 +16,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         </div>
         <div className={style.frameRight}>
           <Header />
-          <Component {...pageProps} />
+          <div className={style.component}>
+            <Component {...pageProps} />
+          </div>
         </div>
       </div>
     </ConfigProvider>)

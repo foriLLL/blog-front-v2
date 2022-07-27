@@ -4,21 +4,22 @@ import PostList from '@/components/PostList'
 import ArticleInfo from '@/types/ArticleInfo'
 import { getAllArticleInfos } from '@/api/articleInfoApi'
 import { GetServerSideProps } from 'next';
+import style from '@/styles/Home.module.sass'
 
-interface IProps{
+interface IProps {
   articleInfos: ArticleInfo[]
 }
-export const getServerSideProps: GetServerSideProps =  async (context)=>{
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const articleInfos = await getAllArticleInfos();
   return {
-    props:{
+    props: {
       articleInfos
     }
   }
 }
 class Home extends React.Component<IProps> {
   render() {
-    const {articleInfos} = this.props;
+    const { articleInfos } = this.props;
     return (
       <>
         <Head>
@@ -27,7 +28,7 @@ class Home extends React.Component<IProps> {
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <main>
+        <main className={style.container}>
           <PostList articleInfos={articleInfos} />
         </main>
       </>
