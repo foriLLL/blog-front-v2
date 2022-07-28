@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import style from "@/styles/components/Sider.module.sass"
 import Link from 'next/link';
-import { Menu } from 'antd';
+import { Menu, MenuTheme } from 'antd';
 import ArticleCate from '@/types/ArticleCate';
 import { getAllArticleCates } from '@/api/articleCateApi';
 import { useRouter } from 'next/router'
-import { NextPage } from 'next';
 
 
-const Sider: NextPage = () => {
+const Sider = (props:{theme: MenuTheme}) => {
   const [articleCates, setArticleCates] = useState<ArticleCate[]>([]);
   const router = useRouter();
 
   useEffect(() => {
-    getAllArticleCates().then(data=>{
+    getAllArticleCates().then(data => {
       setArticleCates(data);
     })
-  }, [router.asPath])
+  }, [typeof window])
 
   const items = [
     { label: <Link href={"/"}><a>首页</a></Link>, key: '/' }, // 菜单项务必填写 key
@@ -49,7 +48,7 @@ const Sider: NextPage = () => {
         </Link>
       </div>
       <div className={style.menu}>
-        <Menu items={items} mode='inline' theme='light' defaultOpenKeys={['cate']} selectedKeys={[router.asPath]} />
+        <Menu items={items} mode='inline' theme={props.theme} defaultOpenKeys={['cate']} selectedKeys={[router.asPath]} />
       </div>
     </div>
   )

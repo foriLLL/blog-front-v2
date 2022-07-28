@@ -5,23 +5,39 @@ import '@/styles/antd-customized.css'
 import Sider from '@/components/Sider'
 import Header from '@/components/Header'
 import zhCN from 'antd/lib/locale/zh_CN';
-import { ConfigProvider } from 'antd'
+import { ConfigProvider, MenuTheme } from 'antd'
+import { useEffect, useState } from 'react'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return (
-    <ConfigProvider locale={zhCN}>
-      <div className={style.frame}>
-        <div className={style.frameLeft}>
-          <Sider />
-        </div>
-        <div className={style.frameRight}>
-          <Header />
-          <div className={style.component}>
-            <Component {...pageProps} />
-          </div>
+  const [theme, setTheme] = useState<MenuTheme>('light');
+
+  if (typeof window !== 'undefined') {
+    useEffect(() => {
+      if (localStorage.theme === 'dark'
+        || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ) {
+        document.body.classList.add('dark');
+        setTheme('dark')
+      } else {
+        document.body.classList.remove('dark');
+      }
+    }, [localStorage.theme]);
+  }
+
+return (
+  <ConfigProvider locale={zhCN}>
+    <div className={style.frame}>
+      <div className={style.frameLeft}>
+        <Sider theme={theme} />
+      </div>
+      <div className={style.frameRight}>
+        <Header theme={theme} />
+        <div className={style.component}>
+          <Component {...pageProps} />
         </div>
       </div>
-    </ConfigProvider>)
+    </div>
+  </ConfigProvider>)
 }
 
 export default MyApp

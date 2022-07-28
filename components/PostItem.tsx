@@ -16,8 +16,8 @@ interface IProps {
 }
 export default class PostItem extends Component<IProps> {
   diffColor: (number: number) => string = (cateId) => {
-    // const colors = ["#758BFD", "#7DCE13", "#f50", "#cd201f", "#108ee9"];
-    const colors = ["purple", "blue", "volcano", "lime", "cyan"];
+    const colors = ["#758BFD", "#7DCE13", "#f50", "#cd201f", "#108ee9"];
+    // const colors = ["purple", "blue", "volcano", "lime", "cyan"];
     return colors[cateId % colors.length];
   }
   render() {
@@ -41,7 +41,7 @@ export default class PostItem extends Component<IProps> {
               </div>
               <div className={style.badges}>
                 <Tag color={this.diffColor(articleInfo.cateId)}>#{articleInfo.cateName}</Tag>
-                <Tag icon={<BarChartOutlined />} color='gold'>{articleInfo.views}</Tag>
+                <Tag icon={<BarChartOutlined />} color='#FFD04B' style={{color:'black'}}>{articleInfo.views}</Tag>
               </div>
             </div>
           </a>

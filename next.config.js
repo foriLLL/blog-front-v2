@@ -7,7 +7,8 @@ const pluginAntdLess = withAntdLess({
   // @ts-ignore
   modifyVars: {
     // '@primary-color': '#8838c5',
-    '@menu-dark-bg': '#555'
+    '@menu-dark-bg': '#262626',
+    '@menu-dark-inline-submenu-bg': '#343434'
   }
 });
 const nextConfig = {

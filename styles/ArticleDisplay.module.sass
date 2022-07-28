@@ -9,21 +9,24 @@
   overflow: auto
   padding: 30px 30px
 
-$page-padding: 20px
 .page
-  padding: $page-padding
+  padding: 50px
   margin: 0 auto
   width: 100%
   max-width: 900px
-  background-color: white
+  background-color: var(--primary-bg-color)
   min-height: 100%
-  border-radius: 20px
-  box-shadow: 3px 3px 10px #ccc
+  border-radius: 10px
+  box-shadow: 3px 3px 10px var(--shadow-color)
+
+@media (max-width: 768px)
+  .page
+    padding: 20px
 
 .menu
   flex-basis: 18%
   flex-shrink: 0
-  background-color: var(--sider-bg-color)
+  background-color: var(--secondary-bg-color)
 
 @media (max-width: 768px)
   .page

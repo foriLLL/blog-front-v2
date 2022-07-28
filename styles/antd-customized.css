@@ -9,3 +9,7 @@
   width: 100%;
   border-bottom: 0px !important
 }
+
+body.dark .ant-divider{
+  background-color: var(--lighter-text-color);
+}
