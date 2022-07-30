@@ -64,11 +64,11 @@ function MyApp({ Component, pageProps }: AppProps) {
           </div>
           <div className={style.frameRight}>
             <Header theme={theme} />
-            <Spin spinning={loading} indicator={<Loading />} delay={100}>
-              <div className={style.component}>
+            <div className={style.component}>
+              <Spin spinning={loading} indicator={<Loading />} delay={100}>
                 <Component {...pageProps} />
-              </div>
-            </Spin>
+              </Spin>
+            </div>
           </div>
         </div>
       </ConfigProvider >

@@ -13,3 +13,7 @@
 body.dark .ant-divider{
   background-color: var(--lighter-text-color);
 }
+
+.ant-spin-nested-loading, .ant-spin-container{
+  height: 100%;
+}
