@@ -6,8 +6,9 @@ const withAntdLess = require('next-plugin-antd-less');
 const pluginAntdLess = withAntdLess({
   // @ts-ignore
   modifyVars: {
-    // '@primary-color': '#8838c5',
-    '@menu-dark-bg': '#262626',
+    // '@primary-color': '#FFD04B',
+    '@primary-color': '#EE7F35',
+    '@menu-dark-bg': '#1a1a1b',
     '@menu-dark-inline-submenu-bg': '#343434'
   }
 });

@@ -15,16 +15,20 @@ body
   --lighter-text-color: #888
   --shadow-color: #ccc
   color-scheme: light
-  --blockquote-color: #7CC2A7
+  --blockquote-color: var(--theme-color)
+  // --blockquote-color: #7CC2A7
+  --theme-color: #EE7F35
+  --gradient-bg-color: linear-gradient(to left bottom, var(--theme-color), #f7dc95, #f9e9c3, #f9e9c3)
 
 body.dark
   --primary-bg-color: #1a1a1b
   --secondary-bg-color: #101010
-  --primary-text-color: #fff
+  --primary-text-color: #eee
   --lighter-text-color: #999
   --shadow-color: #333
   color-scheme: dark
-  p, h1, h2, h3, h4, h5, h6, ul, ol, table, div
+  --gradient-bg-color: linear-gradient(45deg, #9f6225, #7a4c22, #4f321a, #120803)
+  p, h1, h2, h3, h4, h5, h6, ul, ol, table, span
     color: var(--primary-text-color)
 
 a

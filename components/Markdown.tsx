@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { ReactMarkdownOptions } from 'react-markdown/lib/react-markdown';
 import rehypeRaw from 'rehype-raw'
@@ -27,6 +27,10 @@ const Markdown = (props: ReactMarkdownOptions) =>
             {children}
           </div>)
         },
+        table: ({ ...props }) => (<div className={style.tableDiv}><table {...props} /></div>),
+        a: ({ className, ...props }) => {
+          return <a className={[style.a, className].join(' ')} {...props}></a>
+        },
         img: ({ className, ...props }) => (
           <div className={style.imgDiv}><img className={[className, style.img].join(' ')} {...props} /></div>
         ),
@@ -43,13 +47,13 @@ const Markdown = (props: ReactMarkdownOptions) =>
               {...props}
             />
           ) : (
-            <code className={className} {...props}>
+            <code className={[className, style.codeInline].join(' ')} {...props}>
               {children}
             </code>
           )
         },
-        h2({children, ...props}){
-          return <h2 {...props}><LinkOutlined style={{fontSize:'0.7em'}} /> {children}</h2>
+        h2({ children, ...props }) {
+          return <h2 {...props}><LinkOutlined style={{ fontSize: '0.7em' }} /> {children}</h2>
         }
       }}
       {...props} />
