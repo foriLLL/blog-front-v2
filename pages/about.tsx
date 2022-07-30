@@ -5,19 +5,19 @@ import { GetStaticProps } from 'next'
 import React, { Component } from 'react'
 import style from '@/styles/about.module.sass'
 
-interface IProps{
+interface IProps {
   about: About
 }
-export const getStaticProps: GetStaticProps = async ()=>{
-  const about: About|undefined = await getAbout();
-  if(!!about){
-    return{
-      props:{
+export const getStaticProps: GetStaticProps = async () => {
+  const about: About | undefined = await getAbout();
+  if (!!about) {
+    return {
+      props: {
         about
       }
     }
   }
-  return {notFound: true}
+  return { notFound: true }
 }
 export default class about extends Component<IProps> {
   render() {

@@ -10,19 +10,19 @@ interface IProps {
 }
 export const getServerSideProps: GetServerSideProps<IProps> = async (context) => {
   const cateIdStr = context.params && context.params.cateId;
-  if (typeof (cateIdStr) !== 'string' || parseInt(cateIdStr)===NaN) {
+  if (typeof (cateIdStr) !== 'string' || parseInt(cateIdStr) === NaN) {
     return { notFound: true }
-  }else{
+  } else {
     const infos: ArticleInfo[] = await getAllArticleInfosByCateId(parseInt(cateIdStr))
     return {
-      props:{
+      props: {
         articleInfos: infos
       }
     }
   }
-
 }
-const CateList: NextPage<IProps> = (props:IProps) => {
+
+const CateList: NextPage<IProps> = (props: IProps) => {
 
   return (
     <>

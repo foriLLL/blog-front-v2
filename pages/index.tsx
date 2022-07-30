@@ -21,17 +21,9 @@ class Home extends React.Component<IProps> {
   render() {
     const { articleInfos } = this.props;
     return (
-      <>
-        <Head>
-          <title>foriL.space</title>
-          <meta name="description" content="foriL的个人博客" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-
-        <main className={style.container}>
-          <PostList articleInfos={articleInfos} />
-        </main>
-      </>
+      <main className={style.container}>
+        <PostList articleInfos={articleInfos} />
+      </main>
     )
   }
 }
