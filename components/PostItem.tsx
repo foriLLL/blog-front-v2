@@ -31,7 +31,7 @@ export default class PostItem extends Component<IProps> {
             {/* <Markdown></Markdown> */}
             <div className={style.middle}>
               {articleInfo.coverImg && articleInfo.coverImg !== '' &&
-                <img className={style.coverImg} src={articleInfo.coverImg} />
+                <img className={style.coverImg} src={articleInfo.coverImg} alt='' />
               }
               <div className={style.description}>{articleInfo.description}</div>
             </div>

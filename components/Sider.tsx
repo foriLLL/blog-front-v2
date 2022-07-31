@@ -5,9 +5,14 @@ import { Menu, MenuTheme } from 'antd';
 import ArticleCate from '@/types/ArticleCate';
 import { getAllArticleCates } from '@/api/articleCateApi';
 import { useRouter } from 'next/router'
+import avatar from '../public/imgs/avatar.jpg';
+import gitee from '../public/imgs/gitee.svg';
+import github from '../public/imgs/github.svg';
+import mail from '../public/imgs/mail.svg';
+import Image from 'next/image'
 
 
-const Sider = (props:{theme: MenuTheme}) => {
+const Sider = (props: { theme: MenuTheme }) => {
   const [articleCates, setArticleCates] = useState<ArticleCate[]>([]);
   const router = useRouter();
 
@@ -15,7 +20,7 @@ const Sider = (props:{theme: MenuTheme}) => {
     getAllArticleCates().then(data => {
       setArticleCates(data);
     })
-  }, [typeof window])
+  }, [])
 
   const items = [
     { label: <Link href={"/"}><a>首页</a></Link>, key: '/' }, // 菜单项务必填写 key
@@ -33,18 +38,18 @@ const Sider = (props:{theme: MenuTheme}) => {
   return (
     <div className={style.container}>
       <div className={style.avatarBox}>
-        <img src="/imgs/avatar.jpg" alt="avatar" className={style.avatar} />
+        <Image src={avatar} alt="avatar" />
       </div>
       <h1>foriL</h1>
       <div className={style.linkBox}>
         <Link href={"https://gitee.com/foril"}>
-          <a><img className={style.link} src='/imgs/gitee.svg' /></a>
+          <a><Image src={gitee} height='20px' width='20px' alt='gitee' /></a>
         </Link>
         <Link href={"mailto:1571825323@qq.com"}>
-          <a><img className={style.link} src='/imgs/mail.svg' /></a>
+          <a><Image src={mail} height='20px' width='20px' alt='email' /></a>
         </Link>
         <Link href={"https://github.com/foriLLL"}>
-          <a><img className={style.link} src='/imgs/github.svg' /></a>
+          <a><Image src={github} height='20px' width='20px' alt='github' /></a>
         </Link>
       </div>
       <div className={style.menu}>

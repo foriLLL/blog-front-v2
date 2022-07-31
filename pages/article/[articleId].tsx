@@ -32,14 +32,11 @@ const ArticleDisplay: NextPage<IProps> = (props: IProps) => {
   const [headings, setHeadings] = useState<Array<HTMLHeadingElement>>([]);
 
   useEffect(() => {
-    if (!!typeof window) {
-      const page = document.querySelector('.' + style.page);
-      if (page !== null) {
-        setHeadings(Array.from(page.querySelectorAll('h2')));
-      }
+    const page = document.querySelector('.' + style.page);
+    if (page !== null) {
+      setHeadings(Array.from(page.querySelectorAll('h2')));
     }
-  }, [typeof window])
-
+  }, [])
 
   const { article } = props;
   return (

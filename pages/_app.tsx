@@ -14,18 +14,16 @@ import Head from 'next/head'
 function MyApp({ Component, pageProps }: AppProps) {
   const [theme, setTheme] = useState<MenuTheme>('light');
 
-  if (typeof window !== 'undefined') {
-    useEffect(() => {
-      if (localStorage.theme === 'dark'
-        || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
-      ) {
-        document.body.classList.add('dark');
-        setTheme('dark')
-      } else {
-        document.body.classList.remove('dark');
-      }
-    }, [localStorage.theme]);
-  }
+  useEffect(() => {
+    if (localStorage.theme === 'dark'
+      || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      document.body.classList.add('dark');
+      setTheme('dark')
+    } else {
+      document.body.classList.remove('dark');
+    }
+  }, []);
 
   const router = useRouter()
   const [loading, setLoading] = useState(false)

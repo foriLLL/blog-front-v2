@@ -4,14 +4,14 @@ import { ReactMarkdownOptions } from 'react-markdown/lib/react-markdown';
 import rehypeRaw from 'rehype-raw'
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex'
-import style from '@/styles/components/markdown.module.sass'
+import styles from '@/styles/components/markdown.module.sass'
 import remarkGfm from 'remark-gfm'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus as theme } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import { LinkOutlined } from '@ant-design/icons';
 
 const Markdown = (props: ReactMarkdownOptions) =>
-  <div className={style.markdownContainer}>
+  <div className={styles.markdownContainer}>
     <ReactMarkdown
       rehypePlugins={[rehypeRaw, rehypeKatex]}
       remarkPlugins={[remarkMath, remarkGfm]}
@@ -19,7 +19,7 @@ const Markdown = (props: ReactMarkdownOptions) =>
         div({ className, children, ...props }) {
           const match = /math math-display/.exec(className || '')
           if (match) {
-            return (<div className={[className, style.math].join(' ')} {...props}>
+            return (<div className={[className, styles.math].join(' ')} {...props}>
               {children}
             </div>)
           }
@@ -27,27 +27,27 @@ const Markdown = (props: ReactMarkdownOptions) =>
             {children}
           </div>)
         },
-        table: ({ ...props }) => (<div className={style.tableDiv}><table {...props} /></div>),
+        table: ({ ...props }) => (<div className={styles.tableDiv}><table {...props} /></div>),
         a: ({ className, ...props }) => {
-          return <a className={[style.a, className].join(' ')} {...props}></a>
+          return <a className={[styles.a, className].join(' ')} {...props}></a>
         },
-        img: ({ className, ...props }) => (
-          <div className={style.imgDiv}><img className={[className, style.img].join(' ')} {...props} /></div>
-        ),
+        img: ({ style, alt, node, ...props }) => {
+          return (<img {...props} alt={alt} style={Object.assign({}, style, { maxWidth: '100%', marginBottom: '16px' })} />
+          )
+        },
         code({ node, inline, className, children, ...props }) {
           const match = /language-(\w+)/.exec(className || '')
           return !inline && match ? (
             <SyntaxHighlighter
-              className={style.codeDiv}
-              children={String(children).replace(/\n$/, '')}
+              className={styles.codeDiv}
               // @ts-ignore
               style={theme}
               language={match[1]}
               PreTag="div"
               {...props}
-            />
+            >{String(children).replace(/\n$/, '')}</SyntaxHighlighter>
           ) : (
-            <code className={[className, style.codeInline].join(' ')} {...props}>
+            <code className={[className, styles.codeInline].join(' ')} {...props}>
               {children}
             </code>
           )
