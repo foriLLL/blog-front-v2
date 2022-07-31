@@ -38,7 +38,7 @@ const Sider = (props: { theme: MenuTheme }) => {
   return (
     <div className={style.container}>
       <div className={style.avatarBox}>
-        <Image src={avatar} alt="avatar" />
+        <Image src={avatar} alt="avatar" width='100px' height='100px' style={{borderRadius:'10px'}}/>
       </div>
       <h1>foriL</h1>
       <div className={style.linkBox}>
