@@ -1,18 +1,23 @@
 /* Sider */
-.ant-menu-inline{
+.ant-menu-inline {
   border-right: 0px !important;
 }
 
 /* Header */
-.ant-menu-horizontal{
+.ant-menu-horizontal {
   border-bottom: 0px !important
 }
 
-body.dark .ant-divider{
+body.dark .ant-divider {
   background-color: var(--lighter-text-color);
 }
 
-.ant-spin-nested-loading, .ant-spin-container{
+.ant-spin-nested-loading,
+.ant-spin-container {
   height: 100%;
   overflow: hidden;
+}
+
+.ant-menu, .ant-menu-dark {
+  background: transparent !important;
 }
