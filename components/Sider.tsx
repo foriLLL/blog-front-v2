@@ -40,10 +40,10 @@ const Sider = (props:{theme: MenuTheme}) => {
         <Link href={"https://gitee.com/foril"}>
           <a><img className={style.link} src='/imgs/gitee.svg' /></a>
         </Link>
-        <Link href={"https://gitee.com/foril"}>
+        <Link href={"mailto:1571825323@qq.com"}>
           <a><img className={style.link} src='/imgs/mail.svg' /></a>
         </Link>
-        <Link href={"https://gitee.com/foril"}>
+        <Link href={"https://github.com/foriLLL"}>
           <a><img className={style.link} src='/imgs/github.svg' /></a>
         </Link>
       </div>

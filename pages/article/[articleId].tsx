@@ -1,11 +1,12 @@
 import { GetServerSideProps, NextPage } from 'next'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import style from '@/styles/ArticleDisplay.module.sass'
 import Markdown from '@/components/Markdown';
 import 'katex/dist/katex.min.css'
 import { getArticleById } from '@/api/article';
 import Article from '@/types/Article';
 import Head from 'next/head';
+import Menu from '@/components/Menu';
 
 interface IProps {
   article: Article;
@@ -28,6 +29,18 @@ export const getServerSideProps: GetServerSideProps<IProps> = async (context) =>
 }
 
 const ArticleDisplay: NextPage<IProps> = (props: IProps) => {
+  const [headings, setHeadings] = useState<Array<HTMLHeadingElement>>([]);
+
+  useEffect(() => {
+    if (!!typeof window) {
+      const page = document.querySelector('.' + style.page);
+      if (page !== null) {
+        setHeadings(Array.from(page.querySelectorAll('h2')));
+      }
+    }
+  }, [typeof window])
+
+
   const { article } = props;
   return (
     <>
@@ -43,7 +56,7 @@ const ArticleDisplay: NextPage<IProps> = (props: IProps) => {
         </div>
         {/* 移动端点击目录 */}
         <div className={style.menu}>
-          menu
+          <Menu headings={headings} />
         </div>
         {/* 回到顶端 */}
       </div>

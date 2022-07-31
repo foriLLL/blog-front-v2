@@ -53,7 +53,7 @@ const Markdown = (props: ReactMarkdownOptions) =>
           )
         },
         h2({ children, ...props }) {
-          return <h2 {...props}><LinkOutlined style={{ fontSize: '0.7em' }} /> {children}</h2>
+          return <h2 {...props} id={children.toString()}><LinkOutlined style={{ fontSize: '0.7em' }} /> {children}</h2>
         }
       }}
       {...props} />
