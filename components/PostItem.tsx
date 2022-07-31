@@ -28,7 +28,6 @@ export default class PostItem extends Component<IProps> {
           <a>
             <h2>{articleInfo.title}</h2>
             <Divider style={{ margin: '6px 0' }} />
-            {/* <Markdown></Markdown> */}
             <div className={style.middle}>
               {articleInfo.coverImg && articleInfo.coverImg !== '' &&
                 <img className={style.coverImg} src={articleInfo.coverImg} alt='' />

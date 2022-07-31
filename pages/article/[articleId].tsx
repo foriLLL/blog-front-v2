@@ -7,6 +7,9 @@ import { getArticleById } from '@/api/article';
 import Article from '@/types/Article';
 import Head from 'next/head';
 import Menu from '@/components/Menu';
+import { Divider } from 'antd';
+import { CalendarOutlined, EyeOutlined } from '@ant-design/icons';
+import dayjs from 'dayjs';
 
 interface IProps {
   article: Article;
@@ -42,12 +45,21 @@ const ArticleDisplay: NextPage<IProps> = (props: IProps) => {
   return (
     <>
       <Head>
-        <title>{article.title}</title>
+        <title>foril - {article.title}</title>
         <meta name="description" content="foriL的个人博客" />
       </Head>
       <div className={style.container}>
         <div className={style.main}>
           <div className={style.page}>
+            <div className={style.heading}>
+              <h1>{article.title}</h1>
+              <div>
+                <CalendarOutlined /> {dayjs(article.time).format('YYYY-MM-DD')}
+                <Divider type='vertical' />
+                <EyeOutlined /> {article.views}
+              </div>
+            </div>
+            <Divider plain orientation="right"  >阅读时间：{Math.floor(article.content.length / 500)}分钟</Divider>
             <Markdown>{article?.content}</Markdown>
           </div>
         </div>
