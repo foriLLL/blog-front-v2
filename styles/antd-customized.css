@@ -8,13 +8,17 @@
   border-bottom: 0px !important
 }
 
-.ant-divider, .ant-divider::before, .ant-divider::after{
+.ant-divider,
+.ant-divider::before,
+.ant-divider::after {
   border-top: 1px solid var(--lighter-text-color) !important;
 }
+
 .ant-divider-horizontal.ant-divider-with-text {
   border-top: 0px !important;
 }
-.ant-divider-vertical{
+
+.ant-divider-vertical {
   border-left: 1px solid var(--lighter-text-color) !important;
 }
 
@@ -24,9 +28,11 @@
   overflow: hidden;
 }
 
-.ant-menu, .ant-menu-dark {
+.ant-menu.ant-menu-root.ant-menu-inline {
   background: transparent !important;
 }
-.ant-menu-inline .ant-menu-item, .ant-menu-inline .ant-menu-submenu-title{
+
+.ant-menu-inline .ant-menu-item,
+.ant-menu-inline .ant-menu-submenu-title {
   width: 100% !important
 }
