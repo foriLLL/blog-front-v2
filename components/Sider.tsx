@@ -53,7 +53,7 @@ const Sider = (props: { theme: MenuTheme }) => {
         </Link>
       </div>
       <div className={style.menu}>
-        <Menu items={items} mode='inline' theme={props.theme} defaultOpenKeys={['cate']} selectedKeys={[router.asPath]} />
+        <Menu items={items} mode='inline' theme={props.theme} selectedKeys={[router.asPath]} />
       </div>
     </div>
   )
