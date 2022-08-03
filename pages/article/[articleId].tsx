@@ -7,8 +7,8 @@ import { getArticleById } from '@/api/article';
 import Article from '@/types/Article';
 import Head from 'next/head';
 import Menu from '@/components/Menu';
-import { Divider } from 'antd';
-import { CalendarOutlined, EyeOutlined } from '@ant-design/icons';
+import { Divider, Drawer } from 'antd';
+import { CalendarOutlined, EyeOutlined, MenuOutlined, UpOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 
 interface IProps {
@@ -33,6 +33,18 @@ export const getServerSideProps: GetServerSideProps<IProps> = async (context) =>
 
 const ArticleDisplay: NextPage<IProps> = (props: IProps) => {
   const [headings, setHeadings] = useState<Array<HTMLHeadingElement>>([]);
+  const [visible, setVisible] = useState(false);
+
+  const showDrawer = () => {
+    setVisible(true);
+  };
+  const onClose = () => {
+    setVisible(false);
+  };
+  const backToTop = () => {
+    const page = document.getElementsByClassName(style.page);
+    page[0].scrollIntoView({ behavior: 'smooth' })
+  }
 
   useEffect(() => {
     const page = document.querySelector('.' + style.page);
@@ -51,7 +63,7 @@ const ArticleDisplay: NextPage<IProps> = (props: IProps) => {
       <div className={style.container}>
         <div className={style.main}>
           <div className={style.page}>
-            <div className={style.heading}>
+            <div className={style.heading} onClick={showDrawer}>
               <h1>{article.title}</h1>
               <div>
                 <CalendarOutlined /> {dayjs(article.time).format('YYYY-MM-DD')}
@@ -61,13 +73,16 @@ const ArticleDisplay: NextPage<IProps> = (props: IProps) => {
             </div>
             <Divider plain orientation="right"  >阅读时间：{Math.floor(article.content.length / 500)}分钟</Divider>
             <Markdown>{article?.content}</Markdown>
+            <div className={style.levBox}>
+              <div className={style.backToTop} onClick={backToTop}><UpOutlined /></div>
+              <div className={style.menu} onClick={() => setVisible(true)}><MenuOutlined /></div>
+            </div>
           </div>
         </div>
-        {/* 移动端点击目录 */}
-        <div className={style.menu}>
-          <Menu headings={headings} />
-        </div>
         {/* 回到顶端 */}
+        <Drawer title="目录" placement="right" onClose={onClose} visible={visible}>
+          <Menu headings={headings} afterClick={() => { setVisible(false) }} />
+        </Drawer>
       </div>
     </>
   );

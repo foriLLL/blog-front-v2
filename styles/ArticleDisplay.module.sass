@@ -29,16 +29,31 @@
   border-radius: 10px
   box-shadow: 3px 3px 10px var(--shadow-color)
 
+  .levBox
+    width: 40px
+    position: fixed
+    bottom: 5%
+    right: 5%
+    font-size: 24px
+    .backToTop
+      text-align: center
+      background-color: rgba(255, 255, 255, 0.5)
+      border-radius: 50%
+      box-shadow: 2px 2px 14px var(--shadow-color)
+      height: 40px
+      width: 40px
+    .menu
+      text-align: center
+      background-color: rgba(255, 255, 255, 0.5)
+      border-radius: 50%
+      box-shadow: 2px 2px 14px var(--shadow-color)
+      height: 40px
+      width: 40px
+      margin-top: 10px
+
 @media (max-width: 768px)
   .page
     padding: 20px
-
-.menu
-  height: 100%
-  overflow: auto
-  flex-basis: 25%
-  flex-shrink: 0
-  background-color: var(--primary-bg-color)
 
 @media (max-width: 768px)
   .page
@@ -46,5 +61,3 @@
     box-shadow: none
   .main
     padding: 0px
-  .menu
-    display: none

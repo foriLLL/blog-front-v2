@@ -28,11 +28,19 @@
   overflow: hidden;
 }
 
+/* sider menu透明 */
 .ant-menu.ant-menu-root.ant-menu-inline {
   background: transparent !important;
 }
 
+/* sider menu宽度溢出 */
 .ant-menu-inline .ant-menu-item,
 .ant-menu-inline .ant-menu-submenu-title {
   width: 100% !important
+}
+
+/* 抽屉 */
+.ant-drawer-header,
+.ant-drawer-body {
+  background-color: var(--primary-bg-color) !important;
 }
