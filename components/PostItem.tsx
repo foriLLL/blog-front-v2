@@ -26,21 +26,25 @@ export default class PostItem extends Component<IProps> {
       <div className={style.container}>
         <Link href={`/article/${articleInfo.articleId}`}>
           <a>
-            <h2>{articleInfo.title}</h2>
-            <Divider style={{ margin: '6px 0' }} />
-            <div className={style.middle}>
-              {articleInfo.coverImg && articleInfo.coverImg !== '' &&
-                <img className={style.coverImg} src={articleInfo.coverImg} alt='' />
-              }
-              <div className={style.description}>{articleInfo.description}</div>
-            </div>
-            <div className={style.tail}>
-              <div className={style.time}>
-                {dayjs(articleInfo.time).fromNow()}
+            <div className={style.innerContainer}>
+              <div>
+                <h2>{articleInfo.title}</h2>
+                <Divider style={{ margin: '6px 0' }} />
               </div>
-              <div className={style.badges}>
-                <Tag color={this.diffColor(articleInfo.cateId)}>#{articleInfo.cateName}</Tag>
-                <Tag icon={<BarChartOutlined />} color='#F17203'>{articleInfo.views}</Tag>
+              <div className={style.middle}>
+                {articleInfo.coverImg && articleInfo.coverImg !== '' &&
+                  <img className={style.coverImg} src={articleInfo.coverImg} alt='' />
+                }
+                <div className={style.description}>{articleInfo.description}</div>
+              </div>
+              <div className={style.tail}>
+                <div className={style.time}>
+                  {dayjs(articleInfo.time).fromNow()}
+                </div>
+                <div className={style.badges}>
+                  <Tag color={this.diffColor(articleInfo.cateId)}>#{articleInfo.cateName}</Tag>
+                  <Tag icon={<BarChartOutlined />} color='#F17203'>{articleInfo.views}</Tag>
+                </div>
               </div>
             </div>
           </a>
