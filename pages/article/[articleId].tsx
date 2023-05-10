@@ -16,7 +16,7 @@ interface IProps {
 }
 export const getServerSideProps: GetServerSideProps<IProps> = async (context) => {
   const articleIdStr = context.params && context.params.articleId;
-  if (typeof (articleIdStr) !== 'string' || parseInt(articleIdStr) === NaN) {
+  if (typeof (articleIdStr) !== 'string' || Number.isNaN(parseInt(articleIdStr))) {
     return { notFound: true }
   }
   const article: Article | undefined = await getArticleById(parseInt(articleIdStr));
