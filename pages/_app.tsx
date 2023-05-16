@@ -53,6 +53,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>foriL.space</title>
         <meta name="description" content="foriL的个人博客" />
+        <meta name="theme-color" content="#1972F8" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#101010" media="(prefers-color-scheme: dark)" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ConfigProvider locale={zhCN}>
