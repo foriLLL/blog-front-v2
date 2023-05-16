@@ -9,12 +9,12 @@ interface IProps {
   about: About
 }
 export const getStaticProps: GetStaticProps = async () => {
-  const about: About | undefined = await getAbout();
+  const about: About | undefined = await getAbout()
   if (!!about) {
     return {
       props: {
-        about
-      }
+        about,
+      },
     }
   }
   return { notFound: true }
@@ -23,9 +23,7 @@ export default class about extends Component<IProps> {
   render() {
     return (
       <div className={style.container}>
-        <Markdown>
-          {this.props.about.content}
-        </Markdown>
+        <Markdown>{this.props.about.content}</Markdown>
       </div>
     )
   }

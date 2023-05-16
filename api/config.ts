@@ -1,1 +1,2 @@
-export const baseURL = "http://192.168.1.3:8080"
+// todo 改成环境变量
+export const baseURL = "http://localhost:8080"
