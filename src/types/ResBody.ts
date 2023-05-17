@@ -1,4 +1,4 @@
-export default interface ResData<T>{
+export default interface ResData<T> {
   ifSuccessful: boolean
   data: T
   message?: string

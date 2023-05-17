@@ -1,7 +1,7 @@
 import React from 'react'
 import PostList from '@/components/PostList'
 import ArticleInfo from '@/types/ArticleInfo'
-import { getAllArticleInfos } from '@/api/articleInfoApi'
+import { getAllArticleInfos } from '@/requests/articleInfoApi'
 import { GetServerSideProps } from 'next'
 
 interface IProps {

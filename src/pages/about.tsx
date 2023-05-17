@@ -1,4 +1,4 @@
-import { getAbout } from '@/api/about'
+import { getAbout } from '@/requests/about'
 import Markdown from '@/components/Markdown'
 import About from '@/types/About'
 import { GetStaticProps } from 'next'

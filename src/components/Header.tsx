@@ -9,11 +9,11 @@ import {
   TagsOutlined,
 } from '@ant-design/icons'
 import ArticleCate from '@/types/ArticleCate'
-import { getAllArticleCates } from '@/api/articleCateApi'
+import { getAllArticleCates } from '@/requests/articleCateApi'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import avatar from '../public/imgs/avatar.jpg'
+import avatar from '@/public/imgs/avatar.jpg'
 
 const Header = (props: { theme: MenuTheme }) => {
   const [articleCates, setArticleCates] = useState<ArticleCate[]>([])

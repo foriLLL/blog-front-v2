@@ -1,4 +1,4 @@
-export default interface Article{
+export default interface Article {
   articleId: number
   title: string
   cateId: number
