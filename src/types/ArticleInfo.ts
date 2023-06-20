@@ -3,7 +3,7 @@ export default interface ArticleInfo {
   cateName: string
   time: string
   views?: number
-  heroImage: string
+  heroImage?: string
   description: string
   userId?: number
   userName?: string
