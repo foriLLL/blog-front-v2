@@ -12,7 +12,7 @@ export default class PostList extends Component<IProps> {
     return (
       <div className={style.container}>
         {articleInfos.map(info => (
-          <PostItem key={info.articleId} articleInfo={info} />
+          <PostItem key={info.title} articleInfo={info} />
         ))}
       </div>
     )
