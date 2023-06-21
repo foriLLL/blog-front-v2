@@ -35,11 +35,11 @@ const Sider = (props: { theme: MenuTheme }) => {
       key: 'cate',
       children: articleCates.map(cate => ({
         label: (
-          <Link href={`/cate/${cate.cateId}`}>
+          <Link href={`/cate/${encodeURIComponent(cate.cateName)}`}>
             <a>{cate.cateName}</a>
           </Link>
         ),
-        key: `/cate/${cate.cateId}`,
+        key: cate.cateName,
       })),
     },
     {

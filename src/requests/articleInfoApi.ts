@@ -14,11 +14,11 @@ export const getAllArticleInfos: () => Promise<ArticleInfo[]> = async () => {
   }
 }
 
-export const getAllArticleInfosByCateId: (
-  cateId: number,
-) => Promise<ArticleInfo[]> = async cateId => {
+export const getAllArticleInfosByCateName: (
+  cateName: string,
+) => Promise<ArticleInfo[]> = async cateName => {
   const res: AxiosResponse<ResBody<ArticleInfo[]>> = await axios.get(
-    baseURL + `/api/articleInfo/cateId/${cateId}`,
+    baseURL + `/api/articleInfo/${encodeURIComponent(cateName)}`,
   )
   if (res.data && res.data.ifSuccessful) {
     return res.data.data

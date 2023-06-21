@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import style from '@/styles/ArticleDisplay.module.sass'
 import Markdown from '@/components/Markdown'
 import 'katex/dist/katex.min.css'
-import { getArticleById } from '@/requests/article'
+import { getArticle } from '@/requests/article'
 import Article from '@/types/Article'
 import Head from 'next/head'
 import Menu from '@/components/Menu'
@@ -20,16 +20,17 @@ interface IProps {
   article: Article
 }
 export const getServerSideProps: GetServerSideProps<IProps> = async context => {
-  const articleIdStr = context.params && context.params.articleId
-  if (
-    typeof articleIdStr !== 'string' ||
-    Number.isNaN(parseInt(articleIdStr))
-  ) {
+  const params = context.params
+
+  if (!params || !params.cateName || !params.title) {
     return { notFound: true }
   }
-  const article: Article | undefined = await getArticleById(
-    parseInt(articleIdStr),
+
+  const article = await getArticle(
+    params.cateName as string,
+    params.title as string,
   )
+
   if (!!article) {
     return {
       props: {

@@ -16,16 +16,26 @@ interface IProps {
   articleInfo: ArticleInfo
 }
 export default class PostItem extends Component<IProps> {
+  getNumberFromString: (str: string) => number = str => {
+    let sum = 0
+    for (let i = 0; i < str.length; i++) {
+      sum += str.charCodeAt(i)
+    }
+    return sum
+  }
   diffColor: (number: number) => string = cateId => {
     const colors = ['#758BFD', '#64CB0E', '#108ee9', '#cd201f', '#f50']
-    // const colors = ["purple", "blue", "volcano", "lime", "cyan"];
     return colors[cateId % colors.length]
   }
   render() {
     const { articleInfo } = this.props
     return (
       <div className={style.container}>
-        <Link href={`/article/${articleInfo.articleId}`}>
+        <Link
+          href={`/article/${encodeURIComponent(
+            articleInfo.cateName,
+          )}/${encodeURIComponent(articleInfo.title)}`}
+        >
           <a>
             <div className={style.innerContainer}>
               <div>
@@ -33,10 +43,10 @@ export default class PostItem extends Component<IProps> {
                 <Divider style={{ margin: '6px 0' }} />
               </div>
               <div className={style.middle}>
-                {articleInfo.coverImg && articleInfo.coverImg !== '' && (
+                {articleInfo.heroImage && articleInfo.heroImage !== '' && (
                   <img
-                    className={style.coverImg}
-                    src={articleInfo.coverImg}
+                    className={style.heroImage}
+                    src={articleInfo.heroImage}
                     alt=""
                   />
                 )}
@@ -49,7 +59,11 @@ export default class PostItem extends Component<IProps> {
                   {dayjs(articleInfo.time).fromNow()}
                 </div>
                 <div className={style.badges}>
-                  <Tag color={this.diffColor(articleInfo.cateId)}>
+                  <Tag
+                    color={this.diffColor(
+                      this.getNumberFromString(articleInfo.cateName),
+                    )}
+                  >
                     #{articleInfo.cateName}
                   </Tag>
                   <Tag icon={<BarChartOutlined />} color="#F17203">

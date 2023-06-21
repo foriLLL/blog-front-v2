@@ -1,4 +1,4 @@
-import { getAllArticleInfosByCateId } from '@/requests/articleInfoApi'
+import { getAllArticleInfosByCateName } from '@/requests/articleInfoApi'
 import ArticleInfo from '@/types/ArticleInfo'
 import Head from 'next/head'
 import React from 'react'
@@ -9,18 +9,19 @@ interface IProps {
   articleInfos: ArticleInfo[]
 }
 export const getServerSideProps: GetServerSideProps<IProps> = async context => {
-  const cateIdStr = context.params && context.params.cateId
-  if (typeof cateIdStr !== 'string' || parseInt(cateIdStr) === NaN) {
+  const params = context.params
+
+  if (!params || !params.cateName) {
     return { notFound: true }
-  } else {
-    const infos: ArticleInfo[] = await getAllArticleInfosByCateId(
-      parseInt(cateIdStr),
-    )
-    return {
-      props: {
-        articleInfos: infos,
-      },
-    }
+  }
+
+  const infos: ArticleInfo[] = await getAllArticleInfosByCateName(
+    params.cateName as string,
+  )
+  return {
+    props: {
+      articleInfos: infos,
+    },
   }
 }
 
