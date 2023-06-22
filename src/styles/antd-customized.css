@@ -43,6 +43,11 @@
   width: 100% !important
 }
 
+/* menu selected */
+.ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child {
+  background-color: rgba(var(--primary-bg-color), 0.6) !important;
+}
+
 /* 抽屉 */
 .ant-drawer-header,
 .ant-drawer-body {
