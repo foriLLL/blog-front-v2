@@ -24,7 +24,7 @@ export default class PostItem extends Component<IProps> {
     return sum
   }
   diffColor: (number: number) => string = cateId => {
-    const colors = ['#758BFD', '#64CB0E', '#108ee9', '#cd201f', '#f50']
+    const colors = ['#758BFD', '#64CB0E', '#108ee9', '#cd201f', '#f50', '#03A9F4', '#FFB300', '#7E57C2']
     return colors[cateId % colors.length]
   }
   render() {
@@ -47,7 +47,7 @@ export default class PostItem extends Component<IProps> {
                   <img
                     className={style.heroImage}
                     src={articleInfo.heroImage}
-                    alt=""
+                    alt="图片错误"
                   />
                 )}
                 <div className={style.description}>
@@ -56,7 +56,9 @@ export default class PostItem extends Component<IProps> {
               </div>
               <div className={style.tail}>
                 <div className={style.time}>
-                  {dayjs(articleInfo.time).fromNow()}
+                  {articleInfo.time === '未知'
+                    ? '未知'
+                    : dayjs(articleInfo.time).fromNow()}
                 </div>
                 <div className={style.badges}>
                   <Tag

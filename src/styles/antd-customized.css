@@ -33,6 +33,10 @@
   background: transparent !important;
 }
 
+.ant-menu.ant-menu-sub.ant-menu-inline {
+  background: rgba(var(--primary-bg-color), 0.5) !important;
+}
+
 /* sider menu宽度溢出 */
 .ant-menu-inline .ant-menu-item,
 .ant-menu-inline .ant-menu-submenu-title {
@@ -42,5 +46,5 @@
 /* 抽屉 */
 .ant-drawer-header,
 .ant-drawer-body {
-  background-color: var(--primary-bg-color) !important;
+  background-color: rgb(var(--primary-bg-color)) !important;
 }
