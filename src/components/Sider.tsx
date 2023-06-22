@@ -5,10 +5,6 @@ import { Menu, MenuTheme } from 'antd'
 import ArticleCate from '@/types/ArticleCate'
 import { getAllArticleCates } from '@/requests/articleCateApi'
 import { useRouter } from 'next/router'
-import avatar from '@/public/imgs/avatar.jpg'
-import gitee from '@/public/imgs/gitee.svg'
-import github from '@/public/imgs/github.svg'
-import mail from '@/public/imgs/mail.svg'
 import Image from 'next/image'
 
 const Sider = (props: { theme: MenuTheme }) => {
@@ -18,6 +14,7 @@ const Sider = (props: { theme: MenuTheme }) => {
   useEffect(() => {
     getAllArticleCates().then(data => {
       setArticleCates(data)
+      console.log('set cates')
     })
   }, [])
 
@@ -56,7 +53,7 @@ const Sider = (props: { theme: MenuTheme }) => {
     <div className={style.container}>
       <div className={style.avatarBox}>
         <Image
-          src={avatar}
+          src={'/imgs/avatar.jpg'}
           alt="avatar"
           width="100px"
           height="100px"
@@ -67,17 +64,17 @@ const Sider = (props: { theme: MenuTheme }) => {
       <div className={style.linkBox}>
         <Link href={'https://gitee.com/foril'}>
           <a>
-            <Image src={gitee} height="20px" width="20px" alt="gitee" />
+            <Image src={'/imgs/gitee.svg'} height="20px" width="20px" alt="gitee" />
           </a>
         </Link>
         <Link href={'mailto:1571825323@qq.com'}>
           <a>
-            <Image src={mail} height="20px" width="20px" alt="email" />
+            <Image src={'/imgs/mail.svg'} height="20px" width="20px" alt="email" />
           </a>
         </Link>
         <Link href={'https://github.com/foriLLL'}>
           <a>
-            <Image src={github} height="20px" width="20px" alt="github" />
+            <Image src={'/imgs/github.svg'} height="20px" width="20px" alt="github" />
           </a>
         </Link>
       </div>

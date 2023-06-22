@@ -72,12 +72,9 @@ devDependencies:
   eslint-config-next:
     specifier: 12.2.2
     version: registry.npmmirror.com/eslint-config-next@12.2.2(eslint@8.20.0)(typescript@4.7.4)
-  eslint-config-prettier:
-    specifier: ^8.8.0
-    version: registry.npmmirror.com/eslint-config-prettier@8.8.0(eslint@8.20.0)
   eslint-plugin-prettier:
     specifier: ^4.2.1
-    version: registry.npmmirror.com/eslint-plugin-prettier@4.2.1(eslint-config-prettier@8.8.0)(eslint@8.20.0)(prettier@2.8.8)
+    version: registry.npmmirror.com/eslint-plugin-prettier@4.2.1(eslint@8.20.0)(prettier@2.8.8)
   next-compose-plugins:
     specifier: ^2.2.1
     version: registry.npmmirror.com/next-compose-plugins@2.2.1
@@ -1632,18 +1629,6 @@ packages:
       - supports-color
     dev: true
 
-  registry.npmmirror.com/eslint-config-prettier@8.8.0(eslint@8.20.0):
-    resolution: {integrity: sha512-wLbQiFre3tdGgpDv67NQKnJuTlcUVYHas3k+DZCc2U2BadthoEY4B7hLPvAxaqdyOGCzuLfii2fqGph10va7oA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/eslint-config-prettier/-/eslint-config-prettier-8.8.0.tgz}
-    id: registry.npmmirror.com/eslint-config-prettier/8.8.0
-    name: eslint-config-prettier
-    version: 8.8.0
-    hasBin: true
-    peerDependencies:
-      eslint: '>=7.0.0'
-    dependencies:
-      eslint: registry.npmmirror.com/eslint@8.20.0
-    dev: true
-
   registry.npmmirror.com/eslint-import-resolver-node@0.3.6:
     resolution: {integrity: sha512-0En0w03NRVMn9Uiyn8YRPDKvWjxCWkslUEhGNTdGx15RvPJYQ+lbOlqrlNI2vEAs4pDYK4f/HN2TbDmk5TP0iw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/eslint-import-resolver-node/-/eslint-import-resolver-node-0.3.6.tgz}
     name: eslint-import-resolver-node
@@ -1765,7 +1750,7 @@ packages:
       semver: registry.npmmirror.com/semver@6.3.0
     dev: true
 
-  registry.npmmirror.com/eslint-plugin-prettier@4.2.1(eslint-config-prettier@8.8.0)(eslint@8.20.0)(prettier@2.8.8):
+  registry.npmmirror.com/eslint-plugin-prettier@4.2.1(eslint@8.20.0)(prettier@2.8.8):
     resolution: {integrity: sha512-f/0rXLXUt0oFYs8ra4w49wYZBG5GKZpAYsJSm6rnYL5uVDjd+zowwMwVZHnAjf4edNrKpCDYfXDgmRE/Ak7QyQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/eslint-plugin-prettier/-/eslint-plugin-prettier-4.2.1.tgz}
     id: registry.npmmirror.com/eslint-plugin-prettier/4.2.1
     name: eslint-plugin-prettier
@@ -1780,7 +1765,6 @@ packages:
         optional: true
     dependencies:
       eslint: registry.npmmirror.com/eslint@8.20.0
-      eslint-config-prettier: registry.npmmirror.com/eslint-config-prettier@8.8.0(eslint@8.20.0)
       prettier: registry.npmmirror.com/prettier@2.8.8
       prettier-linter-helpers: registry.npmmirror.com/prettier-linter-helpers@1.0.0
     dev: true

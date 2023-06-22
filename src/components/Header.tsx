@@ -13,7 +13,6 @@ import { getAllArticleCates } from '@/requests/articleCateApi'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import avatar from '@/public/imgs/avatar.jpg'
 
 const Header = (props: { theme: MenuTheme }) => {
   const [articleCates, setArticleCates] = useState<ArticleCate[]>([])
@@ -72,7 +71,7 @@ const Header = (props: { theme: MenuTheme }) => {
       </div>
       <div className={style.headerInfo}>
         <Image
-          src={avatar}
+          src={'/imgs/avatar.jpg'}
           alt="avatar"
           width="30px"
           height="30px"
