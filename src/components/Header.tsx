@@ -41,11 +41,11 @@ const Header = (props: { theme: MenuTheme }) => {
       icon: <TagsOutlined />,
       children: articleCates.map(cate => ({
         label: (
-          <Link href={`/cate/${cate.cateId}`}>
+          <Link href={`/cate/${encodeURIComponent(cate.cateName)}`}>
             <a>{cate.cateName}</a>
           </Link>
         ),
-        key: `/cate/${cate.cateId}`,
+        key: `/cate/${encodeURIComponent(cate.cateName)}`,
         icon: <TagOutlined />,
       })),
     },

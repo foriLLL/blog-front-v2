@@ -39,7 +39,7 @@ const Sider = (props: { theme: MenuTheme }) => {
             <a>{cate.cateName}</a>
           </Link>
         ),
-        key: cate.cateName,
+        key: `/cate/${encodeURIComponent(cate.cateName)}`,
       })),
     },
     {

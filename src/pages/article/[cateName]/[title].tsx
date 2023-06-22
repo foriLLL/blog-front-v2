@@ -79,7 +79,7 @@ const ArticleDisplay: NextPage<IProps> = (props: IProps) => {
               <div>
                 <CalendarOutlined /> {dayjs(article.time).format('YYYY-MM-DD')}
                 <Divider type="vertical" />
-                <EyeOutlined /> {article.views}
+                <EyeOutlined /> {article.views || '-'}
               </div>
             </div>
             <Divider plain orientation="right">

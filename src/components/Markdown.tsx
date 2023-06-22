@@ -44,10 +44,24 @@ const Markdown = (props: ReactMarkdownOptions) => (
             <img
               {...props}
               alt={alt}
-              style={Object.assign({}, style, {
-                maxWidth: '100%',
-                marginBottom: '16px',
-              })}
+              style={Object.assign(
+                { maxWidth: '100%' },
+                style,
+                style === undefined ||
+                  (style.margin === undefined &&
+                    style.marginBottom === undefined &&
+                    style.marginTop === undefined &&
+                    style.marginLeft === undefined &&
+                    style.marginRight === undefined)
+                  ? {
+                      marginBottom: '16px',
+                      marginTop: '16px',
+                    }
+                  : {},
+                style === undefined || style.display === undefined
+                  ? { display: 'block' }
+                  : {},
+              )}
             />
           )
         },
