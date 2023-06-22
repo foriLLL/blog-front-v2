@@ -69,11 +69,12 @@ const ArticleDisplay: NextPage<IProps> = (props: IProps) => {
     <>
       <Head>
         <title>foril - {article.title}</title>
-        <meta name="description" content="foriL的个人博客" />
+        <meta name="description" content={article.description} />
       </Head>
       <div className={style.container}>
         <div className={style.main}>
           <div className={style.page}>
+
             <div className={style.heading} onClick={showDrawer}>
               <h1>{article.title}</h1>
               <div>
@@ -82,10 +83,13 @@ const ArticleDisplay: NextPage<IProps> = (props: IProps) => {
                 <EyeOutlined /> {article.views || '-'}
               </div>
             </div>
+
             <Divider plain orientation="right">
               阅读时间：{Math.floor(article.content.length / 500)}分钟
             </Divider>
+            
             <Markdown>{article?.content}</Markdown>
+
             <div className={style.levBox}>
               <div className={style.backToTop} onClick={backToTop}>
                 <UpOutlined />
@@ -94,11 +98,12 @@ const ArticleDisplay: NextPage<IProps> = (props: IProps) => {
                 <MenuOutlined />
               </div>
             </div>
+
           </div>
         </div>
         {/* 回到顶端 */}
         <Drawer
-          title="目录"
+          title="文章目录"
           placement="right"
           onClose={onClose}
           visible={visible}

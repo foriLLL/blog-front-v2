@@ -23,6 +23,7 @@ export default function Menu(props: {
           scrollToTaget(heading.getAttribute('id'))
           props.afterClick()
         }}
+        style={{ display: 'block', width: '100%' }}
       >
         {heading.getAttribute('id')}
       </a>

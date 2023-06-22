@@ -66,9 +66,9 @@ export default class PostItem extends Component<IProps> {
                   >
                     #{articleInfo.cateName}
                   </Tag>
-                  <Tag icon={<BarChartOutlined />} color="#F17203">
+                  {/* <Tag icon={<BarChartOutlined />} color="#F17203">
                     {articleInfo.views}
-                  </Tag>
+                  </Tag> */}
                 </div>
               </div>
             </div>
