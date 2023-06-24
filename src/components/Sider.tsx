@@ -64,17 +64,32 @@ const Sider = (props: { theme: MenuTheme }) => {
       <div className={style.linkBox}>
         <Link href={'https://gitee.com/foril'}>
           <a>
-            <Image src={'/imgs/gitee.svg'} height="20px" width="20px" alt="gitee" />
+            <Image
+              src={'/imgs/gitee.svg'}
+              height="20px"
+              width="20px"
+              alt="gitee"
+            />
           </a>
         </Link>
         <Link href={'mailto:1571825323@qq.com'}>
           <a>
-            <Image src={'/imgs/mail.svg'} height="20px" width="20px" alt="email" />
+            <Image
+              src={'/imgs/mail.svg'}
+              height="20px"
+              width="20px"
+              alt="email"
+            />
           </a>
         </Link>
         <Link href={'https://github.com/foriLLL'}>
           <a>
-            <Image src={'/imgs/github.svg'} height="20px" width="20px" alt="github" />
+            <Image
+              src={'/imgs/github.svg'}
+              height="20px"
+              width="20px"
+              alt="github"
+            />
           </a>
         </Link>
       </div>

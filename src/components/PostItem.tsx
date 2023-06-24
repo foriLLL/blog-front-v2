@@ -24,7 +24,16 @@ export default class PostItem extends Component<IProps> {
     return sum
   }
   diffColor: (number: number) => string = cateId => {
-    const colors = ['#758BFD', '#64CB0E', '#108ee9', '#cd201f', '#f50', '#03A9F4', '#FFB300', '#7E57C2']
+    const colors = [
+      '#758BFD',
+      '#64CB0E',
+      '#108ee9',
+      '#cd201f',
+      '#f50',
+      '#03A9F4',
+      '#FFB300',
+      '#7E57C2',
+    ]
     return colors[cateId % colors.length]
   }
   render() {

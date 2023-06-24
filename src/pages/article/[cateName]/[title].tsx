@@ -74,7 +74,6 @@ const ArticleDisplay: NextPage<IProps> = (props: IProps) => {
       <div className={style.container}>
         <div className={style.main}>
           <div className={style.page}>
-
             <div className={style.heading} onClick={showDrawer}>
               <h1>{article.title}</h1>
               <div>
@@ -87,7 +86,7 @@ const ArticleDisplay: NextPage<IProps> = (props: IProps) => {
             <Divider plain orientation="right">
               阅读时间：{Math.floor(article.content.length / 500)}分钟
             </Divider>
-            
+
             <Markdown>{article?.content}</Markdown>
 
             <div className={style.levBox}>
@@ -98,7 +97,6 @@ const ArticleDisplay: NextPage<IProps> = (props: IProps) => {
                 <MenuOutlined />
               </div>
             </div>
-
           </div>
         </div>
         {/* 回到顶端 */}
