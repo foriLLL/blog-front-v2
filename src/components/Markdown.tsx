@@ -16,6 +16,14 @@ const Markdown = (props: ReactMarkdownOptions) => (
       rehypePlugins={[rehypeRaw, rehypeKatex]}
       remarkPlugins={[remarkMath, remarkGfm]}
       components={{
+        iframe({ style, ...props }) {
+          return (
+            <iframe
+              style={Object.assign({}, style, { maxWidth: '100%' })}
+              {...props}
+            />
+          )
+        },
         div({ className, children, ...props }) {
           const match = /math math-display/.exec(className || '')
           if (match) {
