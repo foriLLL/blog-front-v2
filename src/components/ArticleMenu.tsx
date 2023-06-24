@@ -1,7 +1,7 @@
 import React from 'react'
 import { List } from 'antd'
 
-export default function Menu(props: {
+export default function ArticleMenu(props: {
   headings: Array<HTMLHeadingElement>
   afterClick: () => void
 }) {

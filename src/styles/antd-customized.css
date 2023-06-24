@@ -22,11 +22,6 @@
   border-left: 1px solid var(--lighter-text-color) !important;
 }
 
-.ant-spin-nested-loading,
-.ant-spin-container {
-  height: 100%;
-  overflow: hidden;
-}
 
 /* sider menu透明 */
 .ant-menu.ant-menu-root.ant-menu-inline {
@@ -34,13 +29,7 @@
 }
 
 .ant-menu.ant-menu-sub.ant-menu-inline {
-  background: rgba(var(--primary-bg-color), 0.5) !important;
-}
-
-/* sider menu宽度溢出 */
-.ant-menu-inline .ant-menu-item,
-.ant-menu-inline .ant-menu-submenu-title {
-  width: 100% !important
+  background: rgba(var(--primary-bg-color), 0.3) !important;
 }
 
 /* menu selected */

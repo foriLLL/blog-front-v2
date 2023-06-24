@@ -6,7 +6,7 @@ import 'katex/dist/katex.min.css'
 import { getArticle } from '@/requests/article'
 import Article from '@/types/Article'
 import Head from 'next/head'
-import Menu from '@/components/Menu'
+import ArticleMenu from '@/components/ArticleMenu'
 import { Divider, Drawer } from 'antd'
 import {
   CalendarOutlined,
@@ -90,10 +90,13 @@ const ArticleDisplay: NextPage<IProps> = (props: IProps) => {
             <Markdown>{article?.content}</Markdown>
 
             <div className={style.levBox}>
-              <div className={style.backToTop} onClick={backToTop}>
+              <div className={style.roundContainer} onClick={backToTop}>
                 <UpOutlined />
               </div>
-              <div className={style.menu} onClick={() => setVisible(true)}>
+              <div
+                className={style.roundContainer}
+                onClick={() => setVisible(true)}
+              >
                 <MenuOutlined />
               </div>
             </div>
@@ -104,9 +107,9 @@ const ArticleDisplay: NextPage<IProps> = (props: IProps) => {
           title="文章目录"
           placement="right"
           onClose={onClose}
-          visible={visible}
+          open={visible}
         >
-          <Menu
+          <ArticleMenu
             headings={headings}
             afterClick={() => {
               setVisible(false)
