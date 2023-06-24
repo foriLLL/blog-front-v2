@@ -13,6 +13,8 @@ import Head from 'next/head'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [theme, setTheme] = useState<MenuTheme>('light')
+  const [primaryTextColor, setPrimaryTextColor] = useState<string>('black')
+  // const [themeColor, setThemeColor] = useState<string>('red')
 
   useEffect(() => {
     if (
@@ -25,6 +27,15 @@ function MyApp({ Component, pageProps }: AppProps) {
     } else {
       document.body.classList.remove('dark')
     }
+
+    setPrimaryTextColor(
+      document.body.style.getPropertyValue('--primary-text-color'),
+    )
+    // Header不能正常设置颜色，放弃了
+    // setThemeColor(document.body.style.getPropertyValue('--theme-color'))
+    // setTimeout(() => {
+    //   setThemeColor('green')
+    // }, 2000)
   }, [])
 
   const router = useRouter()
@@ -55,19 +66,20 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>foriL.space</title>
         <meta name="description" content="foriL的个人博客" />
-        <meta
-          name="theme-color"
-          content="#1972F8"
-          media="(prefers-color-scheme: light)"
-        />
-        <meta
-          name="theme-color"
-          content="#101010"
-          media="(prefers-color-scheme: dark)"
-        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ConfigProvider locale={zhCN}>
+      <ConfigProvider
+        theme={{
+          token: {
+            // colorPrimary: themeColor,
+            colorPrimary: '#1e88e5',
+            colorText: primaryTextColor,
+            colorTextDescription: primaryTextColor,
+            colorTextDisabled: primaryTextColor,
+          },
+        }}
+        locale={zhCN}
+      >
         <div className={style.frame}>
           <div className={style.frameLeft}>
             <Sider theme={theme} />

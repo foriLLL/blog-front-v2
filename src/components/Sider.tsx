@@ -14,7 +14,6 @@ const Sider = (props: { theme: MenuTheme }) => {
   useEffect(() => {
     getAllArticleCates().then(data => {
       setArticleCates(data)
-      console.log('set cates')
     })
   }, [])
 
