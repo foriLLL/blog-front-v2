@@ -5,10 +5,12 @@
 
 /* Header */
 .ant-menu-horizontal {
-  background-color: var(--primary-bg-color);
+  background-color: rgb(var(--primary-bg-color));
   border-bottom: 0px !important
 }
-
+.ant-menu.ant-menu-sub.ant-menu-vertical {
+  background-color: rgb(var(--primary-bg-color));
+}
 
 .ant-divider,
 .ant-divider::before,
