@@ -4,9 +4,11 @@
 }
 
 /* Header */
-/* .ant-menu-horizontal {
+.ant-menu-horizontal {
+  background-color: var(--primary-bg-color);
   border-bottom: 0px !important
-} */
+}
+
 
 .ant-divider,
 .ant-divider::before,
