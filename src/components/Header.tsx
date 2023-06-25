@@ -62,6 +62,7 @@ const Header = (props: { theme: MenuTheme }) => {
   return (
     <div className={style.headerContainer}>
       <div className={style.navigator}>
+        {/* bug: 深色模式下，选定menu之后selected颜色不会直接显示，需要晃晃鼠标，应该是antd bug，官方demo也是这样 */}
         <Menu
           mode="horizontal"
           items={items}

@@ -11,7 +11,9 @@ export default function ArticleMenu(props: {
     if (!heading) return
     heading.scrollIntoView({
       behavior: 'smooth',
-      block: 'start',
+      // block: 'start',   // bug：设置为start会在有些时候出现问题（有的最底部heading会导致整个html上移，下方留下空白   https://juejin.cn/post/6977187578898284558
+      block: 'nearest',
+      // inline: 'nearest',
     })
   }
 
