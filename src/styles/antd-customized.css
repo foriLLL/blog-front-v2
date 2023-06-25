@@ -22,6 +22,11 @@
   border-left: 1px solid var(--lighter-text-color) !important;
 }
 
+.ant-spin-nested-loading,
+.ant-spin-container {
+  height: 100%;
+  overflow: hidden;
+}
 
 /* sider menu透明 */
 .ant-menu.ant-menu-root.ant-menu-inline {
