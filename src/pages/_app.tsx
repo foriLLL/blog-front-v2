@@ -85,14 +85,14 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Sider theme={theme} />
           </div>
           <div className={style.frameRight}>
-            <Spin spinning={loading} indicator={<Loading />} delay={100}>
-              <div className={style.flexBox}>
-                <Header theme={theme} />
-                <div className={style.component}>
-                  <Component {...pageProps} />
-                </div>
+            {/* <Spin spinning={loading} indicator={<Loading />} delay={100}> */}
+            <div className={style.flexBox}>
+              <Header theme={theme} />
+              <div className={style.component}>
+                <Component {...pageProps} />
               </div>
-            </Spin>
+            </div>
+            {/* </Spin> */}
           </div>
         </div>
       </ConfigProvider>
