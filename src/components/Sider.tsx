@@ -4,13 +4,15 @@ import Link from 'next/link'
 import { Menu, MenuTheme } from 'antd'
 import ArticleCate from '@/types/ArticleCate'
 import { getAllArticleCates } from '@/requests/articleCate'
-import { getNickname } from '@/requests/meta'
+import { getIconLinks, getNickname } from '@/requests/meta'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
+import IconLink from '@/types/IconLink'
 
 const Sider = (props: { theme: MenuTheme }) => {
   const [articleCates, setArticleCates] = useState<ArticleCate[]>([])
   const [nickname, setNickname] = useState<string>('')
+  const [iconLinks, setIconLinks] = useState<IconLink[]>([])
   const router = useRouter()
 
   useEffect(() => {
@@ -19,6 +21,9 @@ const Sider = (props: { theme: MenuTheme }) => {
     })
     getNickname().then(data => {
       setNickname(data)
+    })
+    getIconLinks().then(data => {
+      setIconLinks(data)
     })
   }, [])
 
@@ -57,45 +62,23 @@ const Sider = (props: { theme: MenuTheme }) => {
     <div className={style.container}>
       <div className={style.avatarBox}>
         <Image
-          src={'/imgs/avatar.jpg'}
+          src={'/static/avatar.jpg'}
           alt="avatar"
-          width="150px"
-          height="150px"
+          width="200px"
+          height="200px"
+          objectFit="cover"
           style={{ borderRadius: '10px' }}
         />
       </div>
       <h1 className={style.nickname}>{nickname}</h1>
       <div className={style.linkBox}>
-        <Link href={'https://gitee.com/foril'}>
-          <a>
-            <Image
-              src={'/imgs/gitee.svg'}
-              height="20px"
-              width="20px"
-              alt="gitee"
-            />
-          </a>
-        </Link>
-        <Link href={'mailto:1571825323@qq.com'}>
-          <a>
-            <Image
-              src={'/imgs/mail.svg'}
-              height="20px"
-              width="20px"
-              alt="email"
-            />
-          </a>
-        </Link>
-        <Link href={'https://github.com/foriLLL'}>
-          <a>
-            <Image
-              src={'/imgs/github.svg'}
-              height="20px"
-              width="20px"
-              alt="github"
-            />
-          </a>
-        </Link>
+        {iconLinks.map(il => (
+          <Link href={il.url ? il.url : ''} key={il.url}>
+            <a>
+              <Image src={il.iconSVG} height="20px" width="20px" alt="gitee" />
+            </a>
+          </Link>
+        ))}
       </div>
       <div className={style.menu}>
         <Menu
