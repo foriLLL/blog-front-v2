@@ -13,14 +13,19 @@ import { getAllArticleCates } from '@/requests/articleCate'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
+import { getNickname } from '@/requests/meta'
 
 const Header = (props: { theme: MenuTheme }) => {
   const [articleCates, setArticleCates] = useState<ArticleCate[]>([])
+  const [nickname, setNickname] = useState<string>('')
   const router = useRouter()
 
   useEffect(() => {
     getAllArticleCates().then(data => {
       setArticleCates(data)
+    })
+    getNickname().then(data => {
+      setNickname(data)
     })
   }, [])
 
@@ -72,13 +77,13 @@ const Header = (props: { theme: MenuTheme }) => {
       </div>
       <div className={style.headerInfo}>
         <Image
-          src={'/imgs/avatar.jpg'}
+          src={'/static/avatar.jpg'}
           alt="avatar"
           width="30px"
           height="30px"
           style={{ borderRadius: '50%' }}
         />
-        <h2>foriL</h2>
+        <h2>{nickname}</h2>
       </div>
     </div>
   )
