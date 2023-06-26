@@ -9,4 +9,12 @@ module.exports = {
   eslint: {
     dirs: ['src'],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/static/:slug*',
+        destination: '/api/static/:slug*',
+      },
+    ]
+  },
 }
