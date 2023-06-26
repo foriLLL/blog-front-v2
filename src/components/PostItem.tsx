@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import style from '@/styles/components/PostItem.module.sass'
 import { Divider, Tag } from 'antd'
 import Link from 'next/link'
-import { BarChartOutlined } from '@ant-design/icons'
 
 import dayjs from 'dayjs'
 import 'dayjs/locale/zh-cn'

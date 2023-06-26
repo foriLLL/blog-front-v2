@@ -9,9 +9,7 @@ export const getArticle: (
 ) => Promise<Article | undefined> = async (cateName, title) => {
   const res: AxiosResponse<ResBody<Article>> = await axios.get(
     baseURL +
-      `/api/article/${encodeURIComponent(cateName)}/${encodeURIComponent(
-        title,
-      )}`,
+      `/article/${encodeURIComponent(cateName)}/${encodeURIComponent(title)}`,
   )
   if (res.data && res.data.ifSuccessful) {
     return res.data.data

@@ -6,7 +6,7 @@ import { baseURL } from './config'
 
 export const getAbout: () => Promise<About | undefined> = async () => {
   const res: AxiosResponse<ResBody<Article>> = await axios.get(
-    baseURL + `/api/about`,
+    baseURL + `/about`,
   )
   if (res.data && res.data.ifSuccessful) {
     return res.data.data

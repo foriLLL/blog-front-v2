@@ -9,7 +9,7 @@ import {
   TagsOutlined,
 } from '@ant-design/icons'
 import ArticleCate from '@/types/ArticleCate'
-import { getAllArticleCates } from '@/requests/articleCateApi'
+import { getAllArticleCates } from '@/requests/articleCate'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Image from 'next/image'

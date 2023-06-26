@@ -5,7 +5,7 @@ import { baseURL } from './config'
 
 export const getAllArticleInfos: () => Promise<ArticleInfo[]> = async () => {
   const res: AxiosResponse<ResBody<ArticleInfo[]>> = await axios.get(
-    baseURL + '/api/articleInfo',
+    baseURL + '/articleInfo',
   )
   if (res.data && res.data.ifSuccessful) {
     return res.data.data
@@ -18,7 +18,7 @@ export const getAllArticleInfosByCateName: (
   cateName: string,
 ) => Promise<ArticleInfo[]> = async cateName => {
   const res: AxiosResponse<ResBody<ArticleInfo[]>> = await axios.get(
-    baseURL + `/api/articleInfo/${encodeURIComponent(cateName)}`,
+    baseURL + `/articleInfo/${encodeURIComponent(cateName)}`,
   )
   if (res.data && res.data.ifSuccessful) {
     return res.data.data

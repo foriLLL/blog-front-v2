@@ -3,17 +3,22 @@ import style from '@/styles/components/Sider.module.sass'
 import Link from 'next/link'
 import { Menu, MenuTheme } from 'antd'
 import ArticleCate from '@/types/ArticleCate'
-import { getAllArticleCates } from '@/requests/articleCateApi'
+import { getAllArticleCates } from '@/requests/articleCate'
+import { getNickname } from '@/requests/meta'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 
 const Sider = (props: { theme: MenuTheme }) => {
   const [articleCates, setArticleCates] = useState<ArticleCate[]>([])
+  const [nickname, setNickname] = useState<string>('')
   const router = useRouter()
 
   useEffect(() => {
     getAllArticleCates().then(data => {
       setArticleCates(data)
+    })
+    getNickname().then(data => {
+      setNickname(data)
     })
   }, [])
 
@@ -54,12 +59,12 @@ const Sider = (props: { theme: MenuTheme }) => {
         <Image
           src={'/imgs/avatar.jpg'}
           alt="avatar"
-          width="100px"
-          height="100px"
+          width="150px"
+          height="150px"
           style={{ borderRadius: '10px' }}
         />
       </div>
-      <h1>foriL</h1>
+      <h1 className={style.nickname}>{nickname}</h1>
       <div className={style.linkBox}>
         <Link href={'https://gitee.com/foril'}>
           <a>

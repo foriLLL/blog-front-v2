@@ -1,4 +1,4 @@
-import { getAllArticleInfosByCateName } from '@/requests/articleInfoApi'
+import { getAllArticleInfosByCateName } from '@/requests/articleInfo'
 import ArticleInfo from '@/types/ArticleInfo'
 import Head from 'next/head'
 import React from 'react'
