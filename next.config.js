@@ -15,6 +15,10 @@ module.exports = {
         source: '/static/:slug*',
         destination: '/api/static/:slug*',
       },
+      {
+        source: '/proxy/:slug*',
+        destination: '/api/proxy/:slug*',
+      },
     ]
   },
 }

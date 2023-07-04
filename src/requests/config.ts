@@ -1,7 +1,12 @@
-const backendUrl =
-  process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8080/'
-const normalizedBackendUrl = backendUrl.endsWith('/')
-  ? backendUrl
-  : backendUrl + '/'
-export const baseURL = normalizedBackendUrl + 'api'
-export const staticURL = normalizedBackendUrl + 'static'
+const port = process.env.NEXT_PUBLIC_PORT || 8080
+const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL || 'https://foril.space/'
+
+const normalizedBackendUrl = backendURL.endsWith('/')
+  ? backendURL.substring(0, backendURL.length - 1) + ':' + port + '/'
+  : backendURL + ':' + port + '/'
+
+const hostname = normalizedBackendUrl.split('://')[1].split(':')[0]
+const apiURL = normalizedBackendUrl + 'api'
+const staticURL = normalizedBackendUrl + 'static'
+
+export { backendURL, apiURL, staticURL, port, hostname }
