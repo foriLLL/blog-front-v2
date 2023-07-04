@@ -5,7 +5,8 @@ import { baseURL } from './config'
 
 export const getAllArticleCates: () => Promise<ArticleCate[]> = async () => {
   const res: AxiosResponse<ResBody<ArticleCate[]>> = await axios.get(
-    baseURL + '/articleCate',
+    // baseURL + '/articleCate',
+    '/proxy/articleCate',
   )
   if (res.data && res.data.ifSuccessful) {
     return res.data.data
