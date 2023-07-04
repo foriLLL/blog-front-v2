@@ -4,7 +4,6 @@ import { Menu, MenuProps, MenuTheme } from 'antd'
 import {
   HomeOutlined,
   InfoCircleOutlined,
-  MailOutlined,
   TagOutlined,
   TagsOutlined,
 } from '@ant-design/icons'
@@ -17,7 +16,7 @@ import { getNickname } from '@/requests/meta'
 
 const Header = (props: { theme: MenuTheme }) => {
   const [articleCates, setArticleCates] = useState<ArticleCate[]>([])
-  const [nickname, setNickname] = useState<string>('')
+  const [nickname, setNickname] = useState<string>('-')
   const router = useRouter()
 
   useEffect(() => {

@@ -11,7 +11,7 @@ import IconLink from '@/types/IconLink'
 
 const Sider = (props: { theme: MenuTheme }) => {
   const [articleCates, setArticleCates] = useState<ArticleCate[]>([])
-  const [nickname, setNickname] = useState<string>('')
+  const [nickname, setNickname] = useState<string>('-')
   const [iconLinks, setIconLinks] = useState<IconLink[]>([])
   const router = useRouter()
 
