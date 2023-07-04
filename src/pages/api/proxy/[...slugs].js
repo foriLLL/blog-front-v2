@@ -1,10 +1,10 @@
-import { baseURL } from '../../../requests/config'
+import { apiURL } from '../../../requests/config'
 import axios from 'axios'
 
 export default async function handler(req, res) {
   try {
     const { slugs } = req.query
-    const backendUrl = `${baseURL}/${slugs.join('/')}`
+    const backendUrl = `${apiURL}/${slugs.join('/')}`
     console.log('backendUrl: ', backendUrl)
 
     // 使用axios或其他库来发送请求

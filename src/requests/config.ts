@@ -6,7 +6,7 @@ const normalizedBackendUrl = backendURL.endsWith('/')
   : backendURL + ':' + port + '/'
 
 const hostname = normalizedBackendUrl.split('://')[1].split(':')[0]
-const baseURL = normalizedBackendUrl + 'api'
+const apiURL = normalizedBackendUrl + 'api'
 const staticURL = normalizedBackendUrl + 'static'
 
-export { backendURL, baseURL, staticURL, port, hostname }
+export { backendURL, apiURL, staticURL, port, hostname }

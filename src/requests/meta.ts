@@ -1,6 +1,5 @@
 import ResBody from '@/types/ResBody'
 import axios, { AxiosResponse } from 'axios'
-import { baseURL } from './config'
 import IconLink from '@/types/IconLink'
 
 export const getNickname: () => Promise<string> = async () => {
