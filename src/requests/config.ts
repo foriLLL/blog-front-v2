@@ -1,4 +1,7 @@
-// todo 改成环境变量
-const backendUrl = 'http://192.168.31.53:8080/'
-export const baseURL = backendUrl + 'api'
-export const staticURL = backendUrl + 'static'
+const backendUrl =
+  process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8080/'
+const normalizedBackendUrl = backendUrl.endsWith('/')
+  ? backendUrl
+  : backendUrl + '/'
+export const baseURL = normalizedBackendUrl + 'api'
+export const staticURL = normalizedBackendUrl + 'static'
