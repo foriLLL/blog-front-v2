@@ -5,7 +5,6 @@ export default async function handler(req, res) {
   try {
     const { slugs } = req.query
     const backendUrl = `${apiURL}/${slugs.join('/')}`
-    console.log('backendUrl: ', backendUrl)
 
     // 使用axios或其他库来发送请求
     const response = await axios.get(backendUrl)
@@ -15,7 +14,6 @@ export default async function handler(req, res) {
 
     res.send(response.data)
   } catch (e) {
-    console.log(e)
     res.status(500).send('Error')
   }
 }
