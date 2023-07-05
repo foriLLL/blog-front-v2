@@ -86,6 +86,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="description" content={`的个人博客`} />
         <link rel="icon" href="/static/avatar.jpg" />
       </Head>
+
       <ConfigProvider
         theme={{
           token: {
