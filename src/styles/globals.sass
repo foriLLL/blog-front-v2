@@ -17,7 +17,9 @@ body
   margin: 0
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif
   color-scheme: light
-  --bg: url('/static/background.jpg')
+  background: url('/static/background.jpg')
+  background-size: cover
+  background-position: center
 
 body.dark
   --primary-bg-color: 26, 26, 26
@@ -26,7 +28,7 @@ body.dark
   --lighter-text-color: #999
   --shadow-color: #333
   color-scheme: dark
-  --bg: linear-gradient(45deg, #4a90e2, #0f1a2f)
+  background: linear-gradient(45deg, #4a90e2, #0f1a2f)
   p, h1, h2, h3, h4, h5, h6, ul, ol, table, span, div
     color: var(--primary-text-color)
 

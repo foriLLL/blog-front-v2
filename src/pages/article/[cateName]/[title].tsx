@@ -68,7 +68,7 @@ const ArticleDisplay: NextPage<IProps> = (props: IProps) => {
   return (
     <>
       <Head>
-        <title>foril - {article.title}</title>
+        <title>{article.title}</title>
         <meta name="description" content={article.description} />
       </Head>
       <div className={style.container}>

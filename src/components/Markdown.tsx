@@ -86,13 +86,22 @@ const Markdown = (props: ReactMarkdownOptions) => (
             >
               {String(children).replace(/\n$/, '')}
             </SyntaxHighlighter>
-          ) : (
+          ) : inline ? (
             <code
               className={[className, styles.codeInline].join(' ')}
               {...props}
             >
               {children}
             </code>
+          ) : (
+            <div className={styles.codeDiv}>
+              <code
+                className={[className, styles.codeInline].join(' ')}
+                {...props}
+              >
+                {children}
+              </code>
+            </div>
           )
         },
         h2({ children, ...props }) {

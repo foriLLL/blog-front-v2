@@ -28,11 +28,6 @@ export const getServerSideProps: GetServerSideProps<IProps> = async context => {
 const CateList: NextPage<IProps> = (props: IProps) => {
   return (
     <>
-      <Head>
-        <title>foriL.space {}</title>
-        <meta name="description" content="foriL的个人博客" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <PostList articleInfos={props.articleInfos} />
     </>
   )

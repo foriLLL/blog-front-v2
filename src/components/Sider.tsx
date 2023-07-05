@@ -9,23 +9,19 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 import IconLink from '@/types/IconLink'
 
-const Sider = (props: { theme: MenuTheme }) => {
-  const [articleCates, setArticleCates] = useState<ArticleCate[]>([])
-  const [nickname, setNickname] = useState<string>('-')
-  const [iconLinks, setIconLinks] = useState<IconLink[]>([])
-  const router = useRouter()
+interface MetaProps {
+  articleCates: ArticleCate[]
+  iconLinks: IconLink[]
+  nickname: string
+}
 
-  useEffect(() => {
-    getAllArticleCates().then(data => {
-      setArticleCates(data)
-    })
-    getNickname().then(data => {
-      setNickname(data)
-    })
-    getIconLinks().then(data => {
-      setIconLinks(data)
-    })
-  }, [])
+const Sider = (
+  props: {
+    theme: MenuTheme
+  } & MetaProps,
+) => {
+  const router = useRouter()
+  const { articleCates, iconLinks, nickname } = props
 
   const items = [
     {

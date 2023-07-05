@@ -8,26 +8,20 @@ import {
   TagsOutlined,
 } from '@ant-design/icons'
 import ArticleCate from '@/types/ArticleCate'
-import { getAllArticleCates } from '@/requests/articleCate'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+
 import Image from 'next/image'
-import { getNickname } from '@/requests/meta'
+import IconLink from '@/types/IconLink'
 
-const Header = (props: { theme: MenuTheme }) => {
-  const [articleCates, setArticleCates] = useState<ArticleCate[]>([])
-  const [nickname, setNickname] = useState<string>('-')
+interface MetaProps {
+  articleCates: ArticleCate[]
+  nickname: string
+  iconLinks: IconLink[]
+}
+const Header = (props: { theme: MenuTheme } & MetaProps) => {
+  const { articleCates, nickname, iconLinks } = props
   const router = useRouter()
-
-  useEffect(() => {
-    getAllArticleCates().then(data => {
-      setArticleCates(data)
-    })
-    getNickname().then(data => {
-      setNickname(data)
-    })
-  }, [])
-
   const items: MenuProps['items'] = [
     {
       label: (
