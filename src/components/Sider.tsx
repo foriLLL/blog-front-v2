@@ -70,7 +70,7 @@ const Sider = (
       <div className={style.linkBox}>
         {iconLinks.map(il => (
           <Link href={il.url ? il.url : ''} key={il.url}>
-            <a>
+            <a title={il.description}>
               <Image src={il.iconSVG} height="20px" width="20px" alt="gitee" />
             </a>
           </Link>
