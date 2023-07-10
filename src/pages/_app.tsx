@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [primaryTextColor, setPrimaryTextColor] = useState<string>('black')
   // const [themeColor, setThemeColor] = useState<string>('red')
   const [articleCates, setArticleCates] = useState<ArticleCate[]>([])
-  const [nickname, setNickname] = useState<string>('-')
+  const [nickname, setNickname] = useState<string>(' ')
   const [iconLinks, setIconLinks] = useState<IconLink[]>([])
 
   useEffect(() => {

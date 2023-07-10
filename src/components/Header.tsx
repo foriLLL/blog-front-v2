@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import style from '@/styles/components/Header.module.sass'
 import { Menu, MenuProps, MenuTheme } from 'antd'
 import {

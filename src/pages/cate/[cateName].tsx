@@ -1,6 +1,5 @@
 import { getAllArticleInfosByCateName } from '@/requests/articleInfo'
 import ArticleInfo from '@/types/ArticleInfo'
-import Head from 'next/head'
 import React from 'react'
 import PostList from '@/components/PostList'
 import { GetServerSideProps, NextPage } from 'next'
