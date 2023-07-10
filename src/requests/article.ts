@@ -7,13 +7,17 @@ export const getArticle: (
   cateName: string,
   title: string,
 ) => Promise<Article | undefined> = async (cateName, title) => {
-  const res: AxiosResponse<ResBody<Article>> = await axios.get(
-    apiURL +
-      `/article/${encodeURIComponent(cateName)}/${encodeURIComponent(title)}`,
-  )
-  if (res.data && res.data.ifSuccessful) {
-    return res.data.data
-  } else {
+  try {
+    const res: AxiosResponse<ResBody<Article>> = await axios.get(
+      apiURL +
+        `/article/${encodeURIComponent(cateName)}/${encodeURIComponent(title)}`,
+    )
+    if (res.data && res.data.ifSuccessful) {
+      return res.data.data
+    } else {
+      return undefined
+    }
+  } catch (e) {
     return undefined
   }
 }
