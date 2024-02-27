@@ -70,7 +70,8 @@ const Header = (props: { theme: MenuTheme } & MetaProps) => {
       </div>
       <div className={style.headerInfo}>
         <Image
-          src={'/static/avatar.jpg'}
+          priority={true}
+          src={'/imgs/avatar.jpg'}
           alt="avatar"
           width="30px"
           height="30px"

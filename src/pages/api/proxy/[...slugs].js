@@ -1,4 +1,4 @@
-import { apiURL } from '../../../requests/config'
+import { apiURL } from '@/requests/config'
 import axios from 'axios'
 
 export default async function handler(req, res) {

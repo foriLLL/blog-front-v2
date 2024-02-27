@@ -18,11 +18,32 @@ import IconLink from '@/types/IconLink'
 function MyApp({ Component, pageProps }: AppProps) {
   const [theme, setTheme] = useState<MenuTheme>('light')
   const [primaryTextColor, setPrimaryTextColor] = useState<string>('black')
-  // const [themeColor, setThemeColor] = useState<string>('red')
   const [articleCates, setArticleCates] = useState<ArticleCate[]>([])
-  const [nickname, setNickname] = useState<string>(' ')
-  const [iconLinks, setIconLinks] = useState<IconLink[]>([])
+  const [nickname, setNickname] = useState<string>('🧊foril') // 该版本中暂不使用请求方法，静态设置
 
+  const staticIconLinks = [
+    {
+      iconSVG: '/imgs/mail.svg',
+      url: 'mailto:1571825323@qq.com',
+      description: '邮箱',
+    },
+    {
+      iconSVG: '/imgs/github.svg',
+      url: 'https://github.com/foriLLL',
+      description: 'GitHub',
+    },
+    {
+      iconSVG: '/imgs/leetcode.svg',
+      url: 'https://leetcode-cn.com/u/foril/',
+      description: 'LeetCode',
+    },
+    {
+      iconSVG: '/imgs/gitee.svg',
+      url: 'https://gitee.com/foril',
+      description: '码云',
+    },
+  ]
+  const [iconLinks, setIconLinks] = useState<IconLink[]>(staticIconLinks)
   useEffect(() => {
     if (
       localStorage.theme === 'dark' ||
@@ -49,12 +70,13 @@ function MyApp({ Component, pageProps }: AppProps) {
     getAllArticleCates().then(data => {
       setArticleCates(data)
     })
-    getNickname().then(data => {
-      setNickname(data)
-    })
-    getIconLinks().then(data => {
-      setIconLinks(data)
-    })
+    // 目前版本都用静态设置
+    // getNickname().then(data => {
+    //   setNickname(data)
+    // })
+    // getIconLinks().then(data => {
+    //   setIconLinks(data)
+    // })
   }, [])
 
   const router = useRouter()
@@ -82,16 +104,16 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>{nickname == '-' ? '请稍后~' : `${nickname}的个人空间`}</title>
-        <meta name="description" content={`的个人博客`} />
-        <link rel="icon" href="/static/avatar.jpg" />
+        <title>🧊foriL 的个人博客</title>
+        <meta name="description" content="foriL 的个人博客" />
+        <link rel="icon" href="imgs/avatar.jpg" />
       </Head>
 
       <ConfigProvider
         theme={{
           token: {
             // colorPrimary: themeColor,
-            colorPrimary: '#1e88e5',
+            colorPrimary: '#436850',
             colorText: primaryTextColor,
             colorTextDescription: primaryTextColor,
             colorTextDisabled: primaryTextColor,

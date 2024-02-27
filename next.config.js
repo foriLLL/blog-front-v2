@@ -9,6 +9,9 @@ module.exports = {
   eslint: {
     dirs: ['src'],
   },
+  images: {
+    domains: ['img.foril.fun'],
+  },
   async rewrites() {
     return [
       {

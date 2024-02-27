@@ -56,7 +56,8 @@ const Sider = (
     <div className={style.container}>
       <div className={style.avatarBox}>
         <Image
-          src={'/static/avatar.jpg'}
+          priority={true}
+          src={'/imgs/avatar.jpg'}
           alt="avatar"
           width="200px"
           height="200px"
@@ -68,7 +69,7 @@ const Sider = (
       <div className={style.linkBox}>
         {iconLinks.map(il => (
           <Link href={il.url ? il.url : ''} key={il.url}>
-            <a>
+            <a target="_blank">
               <Image
                 src={il.iconSVG}
                 height="20px"

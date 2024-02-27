@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 import ReactMarkdown from 'react-markdown'
 import { ReactMarkdownOptions } from 'react-markdown/lib/react-markdown'
 import rehypeRaw from 'rehype-raw'
@@ -13,7 +14,7 @@ import { LinkOutlined } from '@ant-design/icons'
 const Markdown = (props: ReactMarkdownOptions) => (
   <div className={styles.markdownContainer}>
     <ReactMarkdown
-      rehypePlugins={[rehypeRaw, rehypeKatex]}
+      rehypePlugins={[rehypeRaw, rehypeKatex.bind(this, { strict: false })]} // strict: false is required to avoid incompatible warning with LaTeX
       remarkPlugins={[remarkMath, remarkGfm]}
       components={{
         iframe({ style, ...props }) {
@@ -48,29 +49,32 @@ const Markdown = (props: ReactMarkdownOptions) => (
           return <a className={[styles.a, className].join(' ')} {...props}></a>
         },
         img: ({ style, alt, node, ...props }) => {
+          // 这里想改为 Image 组件，但是不能确定每张图片的宽高
           return (
-            <img
-              {...props}
-              alt={alt}
-              style={Object.assign(
-                { maxWidth: '100%' },
-                style,
-                style === undefined ||
-                  (style.margin === undefined &&
-                    style.marginBottom === undefined &&
-                    style.marginTop === undefined &&
-                    style.marginLeft === undefined &&
-                    style.marginRight === undefined)
-                  ? {
-                      marginBottom: '16px',
-                      marginTop: '16px',
-                    }
-                  : {},
-                style === undefined || style.display === undefined
-                  ? { display: 'block' }
-                  : {},
-              )}
-            />
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <img
+                {...props}
+                alt={alt}
+                style={Object.assign(
+                  { ...style },
+                  { maxWidth: '100%' },
+                  style === undefined ||
+                    (style.margin === undefined &&
+                      style.marginBottom === undefined &&
+                      style.marginTop === undefined &&
+                      style.marginLeft === undefined &&
+                      style.marginRight === undefined)
+                    ? {
+                        marginBottom: '16px',
+                        marginTop: '16px',
+                      }
+                    : {},
+                  style === undefined || style.display === undefined
+                    ? { display: 'block' }
+                    : {},
+                )}
+              />
+            </div>
           )
         },
         code({ node, inline, className, children, ...props }) {
