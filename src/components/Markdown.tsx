@@ -11,6 +11,9 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus as theme } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import { LinkOutlined } from '@ant-design/icons'
 
+import { PhotoProvider, PhotoView } from 'react-photo-view'
+import 'react-photo-view/dist/react-photo-view.css'
+
 const Markdown = (props: ReactMarkdownOptions) => (
   <div className={styles.markdownContainer}>
     <ReactMarkdown
@@ -48,33 +51,36 @@ const Markdown = (props: ReactMarkdownOptions) => (
         a: ({ className, ...props }) => {
           return <a className={[styles.a, className].join(' ')} {...props}></a>
         },
-        img: ({ style, alt, node, ...props }) => {
+        img: ({ style, src, alt, node, ...props }) => {
           // 这里想改为 Image 组件，但是不能确定每张图片的宽高
           return (
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <img
-                {...props}
-                alt={alt}
-                style={Object.assign(
-                  { ...style },
-                  { maxWidth: '100%' },
-                  style === undefined ||
-                    (style.margin === undefined &&
-                      style.marginBottom === undefined &&
-                      style.marginTop === undefined &&
-                      style.marginLeft === undefined &&
-                      style.marginRight === undefined)
-                    ? {
-                        marginBottom: '16px',
-                        marginTop: '16px',
-                      }
-                    : {},
-                  style === undefined || style.display === undefined
-                    ? { display: 'block' }
-                    : {},
-                )}
-              />
-            </div>
+            <PhotoProvider>
+              <PhotoView src={src}>
+                <img
+                  src={src}
+                  {...props}
+                  alt={alt}
+                  style={Object.assign(
+                    { ...style },
+                    { maxWidth: '100%' },
+                    style === undefined ||
+                      (style.margin === undefined &&
+                        style.marginBottom === undefined &&
+                        style.marginTop === undefined &&
+                        style.marginLeft === undefined &&
+                        style.marginRight === undefined)
+                      ? {
+                          marginBottom: '16px',
+                          marginTop: '16px',
+                        }
+                      : {},
+                    style === undefined || style.display === undefined
+                      ? { display: 'block' }
+                      : {},
+                  )}
+                />
+              </PhotoView>
+            </PhotoProvider>
           )
         },
         code({ node, inline, className, children, ...props }) {
