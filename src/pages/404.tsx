@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 export default function NotFound() {
   return (
     <div
@@ -9,7 +11,16 @@ export default function NotFound() {
         alignItems: 'center',
       }}
     >
-      <h1>页面走丢了呢 😢</h1>
+      <h1>
+        <Image
+          src={'/imgs/lost.svg'}
+          height="500px"
+          width="500px"
+          alt="gitee"
+          title={'404 Not Found'}
+          style={{ color: 'red' }}
+        />
+      </h1>
     </div>
   )
 }
