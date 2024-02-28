@@ -5,11 +5,14 @@
 
 /* Header */
 .ant-menu-horizontal {
-  background-color: rgb(var(--primary-bg-color));
+  /* background: var(--primary-bg); */ /* HeaderInfo 会不连贯 */
+  background: rgb(var(--article-bg-rgb));
+
   border-bottom: 0px !important
 }
+/* Header popup */
 .ant-menu.ant-menu-sub.ant-menu-vertical {
-  background-color: rgb(var(--primary-bg-color));
+  background: var(--primary-bg);
 }
 
 .ant-divider,
@@ -37,17 +40,20 @@
   background: transparent !important;
 }
 
-.ant-menu.ant-menu-sub.ant-menu-inline {
-  background: rgba(var(--primary-bg-color), 0.3) !important;
-}
-
 /* menu selected */
 .ant-menu-item.ant-menu-item-selected.ant-menu-item-only-child {
-  background-color: rgba(var(--primary-bg-color), 0.6) !important;
+  background-color: rgba(var(--article-bg), 0.6) !important;
 }
 
 /* 抽屉 */
 .ant-drawer-header,
 .ant-drawer-body {
-  background-color: rgb(var(--primary-bg-color)) !important;
+  background: var(--primary-bg) !important;
+  /* background: rgb(var(--article-bg-rgb)) !important; */
+}
+.ant-drawer-title {
+  color: var(--primary-text-color) !important;
+}
+.ant-drawer-close {
+  color: var(--primary-text-color) !important;
 }

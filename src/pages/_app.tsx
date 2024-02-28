@@ -15,56 +15,54 @@ import { getIconLinks, getNickname } from '@/requests/meta'
 import ArticleCate from '@/types/ArticleCate'
 import IconLink from '@/types/IconLink'
 
+const staticIconLinks = [
+  {
+    iconSVG: '/imgs/mail.svg',
+    url: 'mailto:1571825323@qq.com',
+    description: '邮箱',
+  },
+  {
+    iconSVG: '/imgs/github.svg',
+    url: 'https://github.com/foriLLL',
+    description: 'GitHub',
+  },
+  {
+    iconSVG: '/imgs/leetcode.svg',
+    url: 'https://leetcode-cn.com/u/foril/',
+    description: 'LeetCode',
+  },
+  {
+    iconSVG: '/imgs/gitee.svg',
+    url: 'https://gitee.com/foril',
+    description: '码云',
+  },
+]
+
 function MyApp({ Component, pageProps }: AppProps) {
   const [theme, setTheme] = useState<MenuTheme>('light')
   const [primaryTextColor, setPrimaryTextColor] = useState<string>('black')
   const [articleCates, setArticleCates] = useState<ArticleCate[]>([])
   const [nickname, setNickname] = useState<string>('🧊foril') // 该版本中暂不使用请求方法，静态设置
-
-  const staticIconLinks = [
-    {
-      iconSVG: '/imgs/mail.svg',
-      url: 'mailto:1571825323@qq.com',
-      description: '邮箱',
-    },
-    {
-      iconSVG: '/imgs/github.svg',
-      url: 'https://github.com/foriLLL',
-      description: 'GitHub',
-    },
-    {
-      iconSVG: '/imgs/leetcode.svg',
-      url: 'https://leetcode-cn.com/u/foril/',
-      description: 'LeetCode',
-    },
-    {
-      iconSVG: '/imgs/gitee.svg',
-      url: 'https://gitee.com/foril',
-      description: '码云',
-    },
-  ]
   const [iconLinks, setIconLinks] = useState<IconLink[]>(staticIconLinks)
-  useEffect(() => {
-    if (
-      localStorage.theme === 'dark' ||
-      (!('theme' in localStorage) &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      document.body.classList.add('dark')
-      setTheme('dark')
-    } else {
-      document.body.classList.remove('dark')
-    }
 
-    setPrimaryTextColor(
-      document.body.style.getPropertyValue('--primary-text-color'),
-    )
-    // Header不能正常设置颜色，放弃了
-    // setThemeColor(document.body.style.getPropertyValue('--theme-color'))
-    // setTimeout(() => {
-    //   setThemeColor('green')
-    // }, 2000)
-  }, [])
+  useEffect(() => {
+    // 添加主题监听器
+    const theme = window.matchMedia('(prefers-color-scheme: dark)')
+    const changeTheme = () => {
+      if (theme.matches) {
+        setTheme('dark')
+        setPrimaryTextColor('white')
+      } else {
+        setTheme('light')
+        setPrimaryTextColor('black')
+      }
+    }
+    theme.addEventListener('change', changeTheme)
+    changeTheme()
+    return () => {
+      theme.removeEventListener('change', changeTheme)
+    }
+  })
 
   useEffect(() => {
     getAllArticleCates().then(data => {
@@ -103,6 +101,13 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
+      {/* <Script id="show-banner">{`
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.body.classList.add('dark');
+        } else {
+          document.body.classList.remove('dark');
+        }
+      `}</Script> */}
       <Head>
         <title>🧊foriL 的个人博客</title>
         <meta name="description" content="foriL 的个人博客" />

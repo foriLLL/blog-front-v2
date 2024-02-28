@@ -1,3 +1,4 @@
+@use 'variables'
 #__next
   height: 100%
 
@@ -5,36 +6,18 @@ html,
 body
   height: 100%
   width: 100%
-  --primary-bg-color: 255, 255, 255
-  --secondary-bg-color: #f7f8fa
-  --primary-text-color: #000
-  --lighter-text-color: #888
-  --shadow-color: #ccc
-  --blockquote-color: var(--theme-color)
-  --theme-color: #436850
   overflow: hidden
   padding: 0
   margin: 0
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif
   color-scheme: light
-  // background: url('/static/background.jpg')
-  background: linear-gradient(45deg, #99BC85, #E3E1D9)
+  background: var(--primary-bg)
   background-size: cover
   background-position: center
-
-body.dark
-  --primary-bg-color: 26, 26, 26
-  --secondary-bg-color: #101010
-  --primary-text-color: #eee
-  --lighter-text-color: #999
-  --shadow-color: #333
-  color-scheme: dark
-  background: linear-gradient(45deg, #4a90e2, #0f1a2f)
   p, h1, h2, h3, h4, h5, h6, ul, ol, table, span, div
     color: var(--primary-text-color)
 
 a
   color: var(--theme-color)
-
 *
   box-sizing: border-box

@@ -1,0 +1,24 @@
+// _variables.scss
+:root {
+  --primary-bg: linear-gradient(45deg, #99BC85 30%, #E3E1D9 30%);
+  --article-bg-rgb: 255, 255, 255;     // for article background
+  --secondary-bg-color: #f7f8fa;
+  --primary-text-color: #000;
+  --lighter-text-color: #888;
+  --shadow-color: #ccc;
+
+  --blockquote-color: var(--theme-color);
+  --theme-color: #64ad7e;
+  --a-color: #;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --article-bg-rgb: 26, 26, 26;
+    --primary-bg: linear-gradient(45deg, #0f1a2f, #436850);
+    --secondary-bg-color: #101010;
+    --primary-text-color: #eee;
+    --lighter-text-color: #999;
+    --shadow-color: #333;
+  }
+}
