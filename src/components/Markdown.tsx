@@ -23,7 +23,11 @@ const Markdown = (props: ReactMarkdownOptions) => (
         iframe({ style, ...props }) {
           return (
             <iframe
-              style={Object.assign({}, style, { maxWidth: '100%' })}
+              style={Object.assign({}, style, {
+                width: '100%',
+                aspectRatio: '16 / 9',
+                maxWidth: '100%',
+              })}
               {...props}
             />
           )
