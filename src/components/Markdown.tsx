@@ -17,7 +17,7 @@ import 'react-photo-view/dist/react-photo-view.css'
 const Markdown = (props: ReactMarkdownOptions) => (
   <div className={styles.markdownContainer}>
     <ReactMarkdown
-      rehypePlugins={[rehypeRaw, rehypeKatex.bind(this, { strict: false })]} // strict: false is required to avoid incompatible warning with LaTeX
+      rehypePlugins={[rehypeRaw, [rehypeKatex, { strict: false }]]}
       remarkPlugins={[remarkMath, remarkGfm]}
       components={{
         iframe({ style, ...props }) {
