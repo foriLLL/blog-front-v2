@@ -1,5 +1,10 @@
 import Link from 'next/link'
+import { NOT_FOUND_ASCII } from '@/constants/ascii'
 
+/**
+ * 自定义 404 页面
+ * 终端风格的错误提示，包含 ASCII Art "404" 和返回首页链接
+ */
 export default function NotFound() {
   return (
     <div
@@ -20,14 +25,7 @@ export default function NotFound() {
           lineHeight: '1.1',
         }}
       >
-        {`
-  _  _    ___  _  _   
- | || |  / _ \\| || |  
- | || |_| | | | || |_ 
- |__   _| | | |__   _|
-    | | | |_| |  | |  
-    |_|  \\___/   |_|  
-        `}
+        {NOT_FOUND_ASCII}
       </pre>
       <p style={{ color: 'var(--text-muted)', fontSize: '14px' }}>
         <span style={{ color: 'var(--color-red)' }}>error:</span> page not found

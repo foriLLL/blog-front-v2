@@ -9,12 +9,15 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 dayjs.locale('zh-cn')
 dayjs.extend(relativeTime)
 
-interface IProps {
+interface PostItemProps {
   articleInfo: ArticleInfo
 }
 
-export default function PostItem(props: IProps) {
-  const { articleInfo } = props
+/**
+ * 文章列表项
+ * 以终端输出行的形式展示文章标题、发布时间、分类和摘要
+ */
+export default function PostItem({ articleInfo }: PostItemProps) {
   const articleUrl = `/article/${encodeURIComponent(
     articleInfo.cateName,
   )}/${encodeURIComponent(articleInfo.title)}`

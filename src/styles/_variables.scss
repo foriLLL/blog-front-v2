@@ -1,6 +1,9 @@
-// _variables.scss — Terminal Theme Design Tokens
+// _variables.scss — 终端主题设计令牌
+// 使用 .scss 格式（非 .sass）因为 CSS 自定义属性声明需要大括号语法
+// 亮色主题: Cream Terminal（奶油终端）
+// 暗色主题: Dracula Terminal（德古拉终端），跟随系统偏好自动切换
 :root {
-  // Light theme (Cream Terminal)
+  // 亮色主题 (Cream Terminal)
   --bg-primary: #faf8f0;
   --bg-secondary: #f0ede4;
   --bg-card: #f5f2e9;
@@ -42,7 +45,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    // Dark theme (Dracula Terminal)
+    // 暗色主题 (Dracula Terminal)
     --bg-primary: #282a36;
     --bg-secondary: #21222c;
     --bg-card: #2d2f3d;

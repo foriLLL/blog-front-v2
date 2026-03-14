@@ -9,51 +9,58 @@ import Loading from '@/components/Loading'
 import Head from 'next/head'
 import { getAllArticleCates } from '@/requests/articleCate'
 import ArticleCate from '@/types/ArticleCate'
+import { SITE_TITLE, SITE_DESCRIPTION } from '@/constants/site'
 
+/**
+ * 应用根组件
+ * 负责全局布局（侧边栏 + Header + 内容区）、路由加载状态、分类数据获取
+ */
 function MyApp({ Component, pageProps }: AppProps) {
   const [articleCates, setArticleCates] = useState<ArticleCate[]>([])
-
-  useEffect(() => {
-    getAllArticleCates().then(data => {
-      setArticleCates(data)
-    })
-  }, [])
-
   const router = useRouter()
   const [loading, setLoading] = useState(false)
 
+  // 获取文章分类列表（客户端）
   useEffect(() => {
-    const handleChangeStart = () => setLoading(true)
-    const handleChangeComplete = () => setLoading(false)
+    getAllArticleCates().then(setArticleCates)
+  }, [])
 
-    router.events.on('routeChangeStart', handleChangeStart)
-    router.events.on('routeChangeComplete', handleChangeComplete)
-    router.events.on('routeChangeError', handleChangeComplete)
+  // 监听路由切换，显示/隐藏加载动画
+  useEffect(() => {
+    const handleStart = () => setLoading(true)
+    const handleComplete = () => setLoading(false)
+
+    router.events.on('routeChangeStart', handleStart)
+    router.events.on('routeChangeComplete', handleComplete)
+    router.events.on('routeChangeError', handleComplete)
 
     return () => {
-      router.events.off('routeChangeStart', handleChangeStart)
-      router.events.off('routeChangeComplete', handleChangeComplete)
-      router.events.off('routeChangeError', handleChangeComplete)
+      router.events.off('routeChangeStart', handleStart)
+      router.events.off('routeChangeComplete', handleComplete)
+      router.events.off('routeChangeError', handleComplete)
     }
   }, [router])
 
   return (
     <>
       <Head>
-        <title>foril — terminal blog</title>
-        <meta name="description" content="foril 的个人博客 — 终端风格" />
+        <title>{SITE_TITLE}</title>
+        <meta name="description" content={SITE_DESCRIPTION} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/imgs/avatar.jpg" />
       </Head>
 
       <div className={style.frame}>
+        {/* 桌面端侧边栏 */}
         <div className={style.frameLeft}>
           <Sider articleCates={articleCates} />
         </div>
         <div className={style.frameRight}>
+          {/* 移动端顶部导航 */}
           <div className={style.header}>
             <Header articleCates={articleCates} />
           </div>
+          {/* 页面内容区 */}
           <div className={style.component}>
             {loading ? <Loading /> : <Component {...pageProps} />}
           </div>

@@ -5,26 +5,25 @@ import { GetServerSideProps } from 'next'
 import React from 'react'
 import style from '@/styles/about.module.sass'
 
-interface IProps {
+interface AboutPageProps {
   about: About
 }
 
-export const getServerSideProps: GetServerSideProps<IProps> = async () => {
-  const about: About | undefined = await getAbout()
-  if (!!about) {
-    return {
-      props: {
-        about,
-      },
-    }
-  }
-  return { notFound: true }
+export const getServerSideProps: GetServerSideProps<
+  AboutPageProps
+> = async () => {
+  const about = await getAbout()
+  return about ? { props: { about } } : { notFound: true }
 }
 
-export default function AboutPage(props: IProps) {
-  const { about } = props
+/**
+ * "关于"页面
+ * 以终端 `cat` 命令输出的形式展示 README.md 内容
+ */
+export default function AboutPage({ about }: AboutPageProps) {
   return (
     <div className={style.container}>
+      {/* 终端命令提示 */}
       <div
         style={{
           color: 'var(--text-muted)',

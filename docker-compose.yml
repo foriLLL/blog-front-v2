@@ -9,11 +9,9 @@ services:
     ports:
       - "3000:3000" # 映射主机 3000 到容器 3000
     environment:
-      # 后端服务的基础 URL (无端口，无末尾斜杠)
-      NEXT_PUBLIC_BACKEND_URL: http://backend
-      # 后端服务实际运行的端口
-      NEXT_PUBLIC_PORT: 8081
-      # 添加其他前端需要的环境变量...
+      # 后端服务地址（仅 SSR 使用，不暴露到客户端）
+      BACKEND_URL: http://backend
+      BACKEND_PORT: 8081
     depends_on:
       - backend
     networks:

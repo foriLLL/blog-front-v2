@@ -7,110 +7,104 @@ import rehypeKatex from 'rehype-katex'
 import styles from '@/styles/components/markdown.module.sass'
 import remarkGfm from 'remark-gfm'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { dracula as darkTheme } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import { dracula as draculaTheme } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
+/**
+ * Markdown 渲染组件
+ * 支持 GFM、数学公式 (KaTeX)、代码高亮 (Dracula 主题)、iframe 嵌入等
+ */
 const Markdown = (props: ReactMarkdownOptions) => (
   <div className={styles.markdownContainer}>
     <ReactMarkdown
       rehypePlugins={[rehypeRaw, [rehypeKatex, { strict: false }]]}
       remarkPlugins={[remarkMath, remarkGfm]}
       components={{
-        iframe({ style, ...props }) {
+        // iframe 自适应 16:9 宽高比
+        iframe({ style, ...rest }) {
           return (
             <iframe
-              style={Object.assign({}, style, {
+              style={{
                 width: '100%',
                 aspectRatio: '16 / 9',
                 maxWidth: '100%',
-              })}
-              {...props}
+                ...style,
+              }}
+              {...rest}
             />
           )
         },
-        div({ className, children, ...props }) {
-          const match = /math math-display/.exec(className || '')
-          if (match) {
-            return (
-              <div className={[className, styles.math].join(' ')} {...props}>
-                {children}
-              </div>
-            )
-          }
+
+        // 数学公式块增加横向滚动
+        div({ className, children, ...rest }) {
+          const isMathBlock = /math math-display/.test(className || '')
           return (
-            <div className={className} {...props}>
+            <div
+              className={
+                isMathBlock ? `${className} ${styles.math}` : className
+              }
+              {...rest}
+            >
               {children}
             </div>
           )
         },
-        table: ({ ...props }) => (
+
+        // 表格外包裹容器支持横向滚动
+        table: ({ ...rest }) => (
           <div className={styles.tableDiv}>
-            <table {...props} />
+            <table {...rest} />
           </div>
         ),
-        a: ({ className, ...props }) => {
-          return <a className={[styles.a, className].join(' ')} {...props}></a>
-        },
-        img: ({ style, src, alt, node, ...props }) => {
-          return (
-            <img
-              src={src}
-              {...props}
-              alt={alt}
-              style={Object.assign(
-                { ...style },
-                { maxWidth: '100%' },
-                style === undefined ||
-                  (style.margin === undefined &&
-                    style.marginBottom === undefined &&
-                    style.marginTop === undefined &&
-                    style.marginLeft === undefined &&
-                    style.marginRight === undefined)
-                  ? {
-                      marginBottom: '16px',
-                      marginTop: '16px',
-                    }
-                  : {},
-                style === undefined || style.display === undefined
-                  ? { display: 'block' }
-                  : {},
-              )}
-            />
-          )
-        },
-        code({ node, inline, className, children, ...props }) {
-          const match = /language-(\w+)/.exec(className || '')
-          return !inline ? (
-            <SyntaxHighlighter
-              className={styles.codeDiv}
-              // @ts-ignore
-              style={darkTheme}
-              language={match ? match[1] : ''}
-              PreTag="div"
-              {...props}
-            >
-              {String(children).replace(/\n$/, '')}
-            </SyntaxHighlighter>
-          ) : inline ? (
+
+        // 链接统一样式
+        a: ({ className, ...rest }) => (
+          <a className={`${styles.a} ${className || ''}`} {...rest} />
+        ),
+
+        // 图片默认居中、限制最大宽度，支持行内 style 覆盖
+        img: ({ src, alt, style, ...rest }) => (
+          <img
+            src={src}
+            alt={alt}
+            style={{
+              maxWidth: '100%',
+              display: 'block',
+              marginTop: '16px',
+              marginBottom: '16px',
+              ...style,
+            }}
+            {...rest}
+          />
+        ),
+
+        // 代码块：行内用 <code>，块级用 SyntaxHighlighter
+        code({ inline, className, children, ...rest }) {
+          const lang = /language-(\w+)/.exec(className || '')?.[1]
+          return inline ? (
             <code
-              className={[className, styles.codeInline].join(' ')}
-              {...props}
+              className={`${className || ''} ${styles.codeInline}`}
+              {...rest}
             >
               {children}
             </code>
           ) : (
-            <div className={styles.codeDiv}>
-              <code
-                className={[className, styles.codeInline].join(' ')}
-                {...props}
-              >
-                {children}
-              </code>
-            </div>
+            <SyntaxHighlighter
+              className={styles.codeDiv}
+              // @ts-ignore — style 类型不兼容但功能正常
+              style={draculaTheme}
+              language={lang || ''}
+              PreTag="div"
+              {...rest}
+            >
+              {String(children).replace(/\n$/, '')}
+            </SyntaxHighlighter>
           )
         },
-        h2({ children, ...props }) {
+
+        // h2 标题前加 '##' 装饰，生成锚点 id
+        h2({ children, ...rest }) {
           return (
-            <h2 {...props} id={children.toString()}>
+            <h2 {...rest} id={String(children)}>
               <span style={{ color: 'var(--text-accent)', marginRight: '8px' }}>
                 ##
               </span>

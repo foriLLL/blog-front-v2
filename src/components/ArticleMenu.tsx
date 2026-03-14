@@ -1,16 +1,22 @@
 import React from 'react'
+import style from '@/styles/ArticleDisplay.module.sass'
 
 interface ArticleMenuProps {
   headings: Array<HTMLHeadingElement>
   afterClick: () => void
 }
 
-export default function ArticleMenu(props: ArticleMenuProps) {
+/**
+ * 文章目录组件
+ * 在 TOC 抽屉中渲染 h2 标题列表，点击后平滑滚动到对应标题
+ */
+export default function ArticleMenu({
+  headings,
+  afterClick,
+}: ArticleMenuProps) {
   const scrollToTarget = (id: string | null) => {
     if (!id) return
-    const heading = document.getElementById(id)
-    if (!heading) return
-    heading.scrollIntoView({
+    document.getElementById(id)?.scrollIntoView({
       behavior: 'smooth',
       block: 'nearest',
     })
@@ -18,32 +24,15 @@ export default function ArticleMenu(props: ArticleMenuProps) {
 
   return (
     <div>
-      {props.headings.map(heading => {
+      {headings.map(heading => {
         const id = heading.getAttribute('id')
         return (
           <a
             key={id}
+            className={style.tocItem}
             onClick={() => {
               scrollToTarget(id)
-              props.afterClick()
-            }}
-            style={{
-              display: 'block',
-              padding: '6px 20px',
-              color: 'var(--text-secondary)',
-              fontSize: '13px',
-              cursor: 'pointer',
-              transition: 'all 0.15s ease',
-              textDecoration: 'none',
-            }}
-            onMouseEnter={e => {
-              ;(e.target as HTMLElement).style.backgroundColor =
-                'var(--selection-bg)'
-              ;(e.target as HTMLElement).style.color = 'var(--text-accent)'
-            }}
-            onMouseLeave={e => {
-              ;(e.target as HTMLElement).style.backgroundColor = 'transparent'
-              ;(e.target as HTMLElement).style.color = 'var(--text-secondary)'
+              afterClick()
             }}
           >
             → {id}

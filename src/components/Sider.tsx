@@ -3,53 +3,40 @@ import style from '@/styles/components/Sider.module.sass'
 import Link from 'next/link'
 import ArticleCate from '@/types/ArticleCate'
 import { useRouter } from 'next/router'
-
-// ASCII art for "foril" - pre-generated figlet style
-const ASCII_ART = `  __            _ _ 
- / _| ___  _ __(_) |
-| |_ / _ \\| '__| | |
-|  _| (_) | |  | | |
-|_|  \\___/|_|  |_|_|`
+import { NAV_ITEMS, SOCIAL_LINKS, SITE_NAME } from '@/constants/site'
+import { LOGO_ASCII } from '@/constants/ascii'
 
 interface SiderProps {
   articleCates: ArticleCate[]
 }
 
-const Sider = (props: SiderProps) => {
+/**
+ * 侧边栏组件（桌面端显示）
+ * 包含终端标题栏、ASCII Art Logo、社交链接、导航菜单和分类列表
+ */
+const Sider = ({ articleCates }: SiderProps) => {
   const router = useRouter()
-  const { articleCates } = props
   const [cateOpen, setCateOpen] = useState(true)
-
-  const navItems = [
-    { label: '~/home', href: '/', key: '/' },
-    { label: '~/about', href: '/about', key: '/about' },
-  ]
-
-  const socialLinks = [
-    { label: 'github', url: 'https://github.com/foriLLL' },
-    { label: 'email', url: 'mailto:1571825323@qq.com' },
-    { label: 'leetcode', url: 'https://leetcode-cn.com/u/foril/' },
-  ]
 
   return (
     <div className={style.container}>
-      {/* Terminal title bar */}
+      {/* 终端标题栏 */}
       <div className={style.terminalBar}>
         <span className={`${style.dot} ${style.dotRed}`} />
         <span className={`${style.dot} ${style.dotYellow}`} />
         <span className={`${style.dot} ${style.dotGreen}`} />
-        <span className={style.terminalTitle}>foril@blog ~ </span>
+        <span className={style.terminalTitle}>{SITE_NAME}@blog ~ </span>
       </div>
 
-      {/* Profile section */}
+      {/* 个人信息 */}
       <div className={style.profile}>
-        <pre className={style.asciiArt}>{ASCII_ART}</pre>
+        <pre className={style.asciiArt}>{LOGO_ASCII}</pre>
         <div className={style.bio}>
           <span style={{ color: 'var(--text-muted)' }}>{'// '}</span>
           developer & blogger
         </div>
         <div className={style.links}>
-          {socialLinks.map(link => (
+          {SOCIAL_LINKS.map(link => (
             <a
               key={link.url}
               href={link.url}
@@ -63,13 +50,13 @@ const Sider = (props: SiderProps) => {
         </div>
       </div>
 
-      {/* Navigation */}
+      {/* 导航菜单 */}
       <nav className={style.nav}>
-        {navItems.map(item => (
-          <Link href={item.href} key={item.key}>
+        {NAV_ITEMS.map(item => (
+          <Link href={item.href} key={item.href}>
             <a
               className={`${style.navItem} ${
-                router.asPath === item.key ? style.navItemActive : ''
+                router.asPath === item.href ? style.navItemActive : ''
               }`}
             >
               <span className={style.prompt}>$</span>
@@ -78,7 +65,7 @@ const Sider = (props: SiderProps) => {
           </Link>
         ))}
 
-        {/* Categories */}
+        {/* 文章分类（可折叠） */}
         <div className={style.cateGroup}>
           <div
             className={style.cateLabel}

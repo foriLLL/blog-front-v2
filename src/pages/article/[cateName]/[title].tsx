@@ -1,4 +1,4 @@
-import { GetServerSideProps, NextPage } from 'next'
+import { GetServerSideProps } from 'next'
 import React, { useEffect, useState } from 'react'
 import style from '@/styles/ArticleDisplay.module.sass'
 import Markdown from '@/components/Markdown'
@@ -8,54 +8,50 @@ import Article from '@/types/Article'
 import Head from 'next/head'
 import ArticleMenu from '@/components/ArticleMenu'
 import dayjs from 'dayjs'
+import { READING_SPEED } from '@/constants/site'
 
-interface IProps {
+interface ArticlePageProps {
   article: Article
 }
 
-export const getServerSideProps: GetServerSideProps<IProps> = async context => {
-  const params = context.params
+export const getServerSideProps: GetServerSideProps<
+  ArticlePageProps
+> = async context => {
+  const { cateName, title } = context.params || {}
+  if (!cateName || !title) return { notFound: true }
 
-  if (!params || !params.cateName || !params.title) {
-    return { notFound: true }
-  }
-
-  const article = await getArticle(
-    params.cateName as string,
-    params.title as string,
-  )
-
-  if (!!article) {
-    return {
-      props: {
-        article,
-      },
-    }
-  } else {
-    return { notFound: true }
-  }
+  const article = await getArticle(cateName as string, title as string)
+  return article ? { props: { article } } : { notFound: true }
 }
 
-const ArticleDisplay: NextPage<IProps> = (props: IProps) => {
-  const [headings, setHeadings] = useState<Array<HTMLHeadingElement>>([])
+/**
+ * 文章详情页
+ * 展示 Markdown 正文，支持浮动操作按钮（回到顶部、打开目录）和侧滑 TOC 抽屉
+ */
+export default function ArticlePage({ article }: ArticlePageProps) {
+  const [headings, setHeadings] = useState<HTMLHeadingElement[]>([])
   const [tocVisible, setTocVisible] = useState(false)
 
-  const backToTop = () => {
-    const page = document.getElementsByClassName(style.page)
-    if (page[0]) {
-      page[0].scrollIntoView({ behavior: 'smooth' })
-    }
-  }
+  // 预估阅读时间（至少 1 分钟）
+  const readingMinutes = Math.max(
+    1,
+    Math.floor(article.content.length / READING_SPEED),
+  )
 
+  // 页面加载后提取所有 h2 标题用于生成目录
   useEffect(() => {
-    const page = document.querySelector('.' + style.page)
-    if (page !== null) {
+    const page = document.querySelector(`.${style.page}`)
+    if (page) {
       setHeadings(Array.from(page.querySelectorAll('h2')))
     }
   }, [])
 
-  const { article } = props
-  const readingMinutes = Math.max(1, Math.floor(article.content.length / 500))
+  /** 平滑滚动到页面顶部 */
+  const backToTop = () => {
+    document
+      .querySelector(`.${style.page}`)
+      ?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   return (
     <>
@@ -63,9 +59,11 @@ const ArticleDisplay: NextPage<IProps> = (props: IProps) => {
         <title>{article.title} — foril</title>
         <meta name="description" content={article.description} />
       </Head>
+
       <div className={style.container}>
         <div className={style.main}>
           <div className={style.page}>
+            {/* 文章标题和元信息 */}
             <div className={style.heading}>
               <h1 className={style.headingTitle}>{article.title}</h1>
               <div className={style.headingMeta}>
@@ -81,9 +79,10 @@ const ArticleDisplay: NextPage<IProps> = (props: IProps) => {
               </div>
             </div>
 
-            <Markdown>{article?.content}</Markdown>
+            {/* Markdown 正文 */}
+            <Markdown>{article.content}</Markdown>
 
-            {/* Floating action buttons */}
+            {/* 浮动操作按钮 */}
             <div className={style.levBox}>
               <div className={style.roundContainer} onClick={backToTop}>
                 ↑
@@ -98,13 +97,15 @@ const ArticleDisplay: NextPage<IProps> = (props: IProps) => {
           </div>
         </div>
 
-        {/* TOC Drawer - replaces Ant Design Drawer */}
+        {/* TOC 抽屉遮罩层 */}
         <div
           className={`${style.tocOverlay} ${
             tocVisible ? style.tocOverlayVisible : ''
           }`}
           onClick={() => setTocVisible(false)}
         />
+
+        {/* TOC 侧滑抽屉 */}
         <div
           className={`${style.tocDrawer} ${
             tocVisible ? style.tocDrawerVisible : ''
@@ -130,5 +131,3 @@ const ArticleDisplay: NextPage<IProps> = (props: IProps) => {
     </>
   )
 }
-
-export default ArticleDisplay

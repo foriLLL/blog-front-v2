@@ -4,20 +4,20 @@ import ArticleInfo from '@/types/ArticleInfo'
 import { getAllArticleInfos } from '@/requests/articleInfo'
 import { GetServerSideProps } from 'next'
 
-interface IProps {
+interface HomePageProps {
   articleInfos: ArticleInfo[]
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const articleInfos = await getAllArticleInfos()
-  return {
-    props: {
-      articleInfos,
-    },
-  }
-}
+export const getServerSideProps: GetServerSideProps<
+  HomePageProps
+> = async () => ({
+  props: { articleInfos: await getAllArticleInfos() },
+})
 
-export default function Home(props: IProps) {
-  const { articleInfos } = props
+/**
+ * 首页
+ * 展示所有文章的摘要列表
+ */
+export default function HomePage({ articleInfos }: HomePageProps) {
   return <PostList articleInfos={articleInfos} />
 }
