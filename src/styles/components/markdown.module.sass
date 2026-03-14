@@ -1,43 +1,117 @@
 .markdownContainer
-  font-size: 1rem
-  line-height: 2rem
+  font-size: 14px
+  line-height: 1.8
+  color: var(--text-primary)
+
+  h1, h2, h3, h4, h5, h6
+    color: var(--text-primary)
+    margin-top: 1.5em
+    margin-bottom: 0.5em
+    font-weight: 600
+
+  h1
+    font-size: 1.4em
+    border-bottom: 2px solid var(--border-color)
+    padding-bottom: 0.3em
+
+  h2
+    font-size: 1.2em
+    border-bottom: 1px dashed var(--border-subtle)
+    padding-bottom: 0.2em
+    cursor: pointer
+    &:hover
+      color: var(--text-accent)
+
+  h3
+    font-size: 1.05em
+
+  p
+    margin-bottom: 1em
+    color: var(--text-primary)
+
+  ul, ol
+    padding-left: 1.5em
+    margin-bottom: 1em
+    color: var(--text-primary)
+
+  li
+    margin-bottom: 0.3em
+    &::marker
+      color: var(--text-accent)
+
+  blockquote
+    margin: 16px 0
+    padding: 12px 16px
+    border-left: 3px solid var(--text-accent)
+    background-color: var(--bg-secondary)
+    border-radius: 0 6px 6px 0
+    color: var(--text-secondary)
+    font-style: italic
+
   table
     margin-bottom: 1rem
-  blockquote
-    margin: 10px
-    padding: 14px
-    box-shadow: 3px 3px 8px var(--shadow-color)
-    border-left: 5px var(--blockquote-color) solid
-    border-radius: 0 10px 10px 0
-    background-color: var(--secondary-bg-color)
+
   .codeDiv
-    border-radius: 8px
+    border-radius: 6px
     max-width: 100%
     overflow: auto
+    margin: 12px 0
+    font-size: 13px
+
   .codeInline
-    color: var(--lighter-text-color)
+    color: var(--color-orange)
+    background-color: var(--bg-code)
+    padding: 2px 6px
+    border-radius: 3px
+    font-size: 0.9em
     word-break: break-all
-    font-family: Consolas, Monaco, "Source Code Pro", monospace
+    font-family: 'JetBrains Mono', 'Consolas', 'Monaco', monospace
 
   .a
+    color: var(--text-accent)
     word-break: break-all
+    &:hover
+      color: var(--color-blue)
+
   .tableDiv
     max-width: 100%
     overflow: auto
+    margin: 12px 0
+    border-radius: 6px
+    border: 1px solid var(--border-color)
     table
-      margin: 1rem
+      margin: 0
+      width: 100%
+      border-collapse: collapse
     td,
     th,
     tr
-      border: 1px solid var(--shadow-color)
-      padding: 0rem 0.5rem
+      border: 1px solid var(--border-color)
+      padding: 6px 12px
+      font-size: 13px
     th
-      background-color: var(--theme-color)
-      color: white
+      background-color: var(--bg-header)
+      color: var(--text-primary)
+      font-weight: 600
     tr:nth-child(even)
-      background-color: var(--secondary-bg-color)
-    tr:nth-child(odd)
-      background-color: rgb(var(--primary-bg-color))
+      background-color: var(--bg-secondary)
+
+  img
+    max-width: 100%
+    border-radius: 6px
+    border: 1px solid var(--border-subtle)
+
+  hr
+    border: none
+    border-top: 1px dashed var(--border-color)
+    margin: 24px 0
+
+  strong
+    color: var(--text-primary)
+    font-weight: 700
+
+  em
+    color: var(--text-secondary)
 
 .math
   max-width: 100%
@@ -49,3 +123,34 @@
 
 .img
   max-width: 100%
+
+@media (max-width: 768px)
+  .markdownContainer
+    font-size: 13px
+    line-height: 1.7
+
+    h1
+      font-size: 1.2em
+
+    h2
+      font-size: 1.1em
+
+    blockquote
+      margin: 12px 0
+      padding: 8px 12px
+
+    .codeDiv
+      font-size: 12px
+      border-radius: 4px
+
+    .codeInline
+      font-size: 0.85em
+      padding: 1px 4px
+
+    .tableDiv
+      td,
+      th,
+      tr
+        padding: 4px 8px
+        font-size: 12px
+

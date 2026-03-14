@@ -12,16 +12,4 @@ module.exports = {
   images: {
     domains: ['img.foril.fun'],
   },
-  async rewrites() {
-    return [
-      {
-        source: '/static/:slug*',
-        destination: '/api/static/:slug*',
-      },
-      {
-        source: '/proxy/:slug*',
-        destination: '/api/proxy/:slug*',
-      },
-    ]
-  },
 }

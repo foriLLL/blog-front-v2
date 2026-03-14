@@ -3,22 +3,82 @@
   display: flex
   overflow: hidden
   flex-shrink: 0
-  justify-content: space-between
-  background-color: rgb(var(--article-bg-rgb))
-  border-bottom: 1px solid var(--shadow-color)
+  align-items: center
+  background-color: var(--bg-header)
+  border-bottom: 1px solid var(--border-color)
+  padding: 0 16px
 
-@media (min-width:768px)
+@media (min-width: 769px)
   .headerContainer
     display: none
 
-.navigator
-  flex-basis: 100%
-
-.headerInfo
-  background-color: rgb(var(--article-bg-rgb))
+.dots
   display: flex
+  gap: 6px
+  margin-right: 12px
   flex-shrink: 0
+
+.dot
+  width: 10px
+  height: 10px
+  border-radius: 50%
+
+.dotRed
+  background-color: var(--terminal-dot-red)
+
+.dotYellow
+  background-color: var(--terminal-dot-yellow)
+
+.dotGreen
+  background-color: var(--terminal-dot-green)
+
+.nav
+  display: flex
   align-items: center
-  h2
-    margin: 0 12px
-    overflow: hidden
+  gap: 4px
+  overflow-x: auto
+  flex: 1
+  padding: 8px 0
+
+.navLink
+  color: var(--text-secondary)
+  font-size: 12px
+  padding: 4px 10px
+  border-radius: 4px
+  white-space: nowrap
+  transition: all 0.15s ease
+  text-decoration: none
+  &:hover
+    background-color: var(--bg-hover)
+    color: var(--text-primary)
+    text-decoration: none
+
+.navLinkActive
+  color: var(--text-accent)
+  background-color: var(--selection-bg)
+
+.prompt
+  color: var(--prompt-color)
+  font-weight: 600
+
+.nickname
+  color: var(--text-muted)
+  font-size: 11px
+  margin-left: auto
+  flex-shrink: 0
+  padding-left: 12px
+
+@media (max-width: 480px)
+  .nav
+    -ms-overflow-style: none
+    scrollbar-width: none
+    &::-webkit-scrollbar
+      display: none
+  .navLink
+    padding: 6px 8px
+    font-size: 11px
+  .dots
+    margin-right: 8px
+  .nickname
+    display: none
+

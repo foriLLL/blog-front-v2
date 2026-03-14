@@ -1,24 +1,80 @@
-// _variables.scss
+// _variables.scss — Terminal Theme Design Tokens
 :root {
-  --primary-bg: linear-gradient(45deg, #99BC85 30%, #E3E1D9 30%);
-  --article-bg-rgb: 255, 255, 255;     // for article background
-  --secondary-bg-color: #f7f8fa;
-  --primary-text-color: #000;
-  --lighter-text-color: #888;
-  --shadow-color: #ccc;
-
-  --blockquote-color: var(--theme-color);
-  --theme-color: #64ad7e;
-  --a-color: #;
+  // Light theme (Cream Terminal)
+  --bg-primary: #faf8f0;
+  --bg-secondary: #f0ede4;
+  --bg-card: #f5f2e9;
+  --bg-code: #ebdbb2;
+  --bg-header: #e8e4d9;
+  --bg-hover: #e6e2d6;
+  
+  --text-primary: #3c3836;
+  --text-secondary: #7c7065;
+  --text-muted: #a89984;
+  --text-accent: #427b58;
+  
+  --color-green: #427b58;
+  --color-blue: #076678;
+  --color-red: #cc241d;
+  --color-yellow: #b57614;
+  --color-purple: #8f3f71;
+  --color-cyan: #427b58;
+  --color-orange: #af3a03;
+  
+  --border-color: #d5c4a1;
+  --border-subtle: #e0ddd5;
+  --shadow-color: rgba(60, 56, 54, 0.1);
+  
+  --prompt-color: #427b58;
+  --cursor-color: #3c3836;
+  --selection-bg: rgba(66, 123, 88, 0.2);
+  
+  --terminal-dot-red: #ff5f56;
+  --terminal-dot-yellow: #ffbd2e;
+  --terminal-dot-green: #27c93f;
+  
+  --scrollbar-thumb: #d5c4a1;
+  --scrollbar-track: transparent;
+  
+  --tag-bg: rgba(66, 123, 88, 0.12);
+  --tag-text: #427b58;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --article-bg-rgb: 26, 26, 26;
-    --primary-bg: linear-gradient(45deg, #011c14, #436850);
-    --secondary-bg-color: #101010;
-    --primary-text-color: #eee;
-    --lighter-text-color: #999;
-    --shadow-color: #333;
+    // Dark theme (Dracula Terminal)
+    --bg-primary: #282a36;
+    --bg-secondary: #21222c;
+    --bg-card: #2d2f3d;
+    --bg-code: #1e1f29;
+    --bg-header: #343746;
+    --bg-hover: #3a3d4e;
+    
+    --text-primary: #f8f8f2;
+    --text-secondary: #bfbfbf;
+    --text-muted: #6272a4;
+    --text-accent: #50fa7b;
+    
+    --color-green: #50fa7b;
+    --color-blue: #8be9fd;
+    --color-red: #ff5555;
+    --color-yellow: #f1fa8c;
+    --color-purple: #bd93f9;
+    --color-cyan: #8be9fd;
+    --color-orange: #ffb86c;
+    
+    --border-color: #44475a;
+    --border-subtle: #3a3d4e;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    
+    --prompt-color: #50fa7b;
+    --cursor-color: #f8f8f2;
+    --selection-bg: rgba(80, 250, 123, 0.15);
+    
+    --scrollbar-thumb: #44475a;
+    --scrollbar-track: transparent;
+    
+    --tag-bg: rgba(80, 250, 123, 0.1);
+    --tag-text: #50fa7b;
   }
 }

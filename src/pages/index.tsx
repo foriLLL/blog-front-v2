@@ -7,7 +7,8 @@ import { GetServerSideProps } from 'next'
 interface IProps {
   articleInfos: ArticleInfo[]
 }
-export const getServerSideProps: GetServerSideProps = async context => {
+
+export const getServerSideProps: GetServerSideProps = async () => {
   const articleInfos = await getAllArticleInfos()
   return {
     props: {
@@ -15,10 +16,8 @@ export const getServerSideProps: GetServerSideProps = async context => {
     },
   }
 }
-class Home extends React.Component<IProps> {
-  render() {
-    const { articleInfos } = this.props
-    return <PostList articleInfos={articleInfos} />
-  }
+
+export default function Home(props: IProps) {
+  const { articleInfos } = props
+  return <PostList articleInfos={articleInfos} />
 }
-export default Home

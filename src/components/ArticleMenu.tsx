@@ -1,41 +1,55 @@
 import React from 'react'
-import { List } from 'antd'
 
-export default function ArticleMenu(props: {
+interface ArticleMenuProps {
   headings: Array<HTMLHeadingElement>
   afterClick: () => void
-}) {
-  const scrollToTaget = (id: string | null) => {
+}
+
+export default function ArticleMenu(props: ArticleMenuProps) {
+  const scrollToTarget = (id: string | null) => {
     if (!id) return
     const heading = document.getElementById(id)
     if (!heading) return
     heading.scrollIntoView({
       behavior: 'smooth',
-      // block: 'start',   // bug：设置为start会在有些时候出现问题（有的最底部heading会导致整个html上移，下方留下空白   https://juejin.cn/post/6977187578898284558
       block: 'nearest',
-      // inline: 'nearest',
     })
   }
 
-  const data = props.headings.map(heading => {
-    return (
-      <a
-        key={heading.getAttribute('id')}
-        onClick={e => {
-          scrollToTaget(heading.getAttribute('id'))
-          props.afterClick()
-        }}
-        style={{ display: 'block', width: '100%' }}
-      >
-        {heading.getAttribute('id')}
-      </a>
-    )
-  })
-
   return (
-    <List
-      dataSource={data}
-      renderItem={item => <List.Item>{item}</List.Item>}
-    />
+    <div>
+      {props.headings.map(heading => {
+        const id = heading.getAttribute('id')
+        return (
+          <a
+            key={id}
+            onClick={() => {
+              scrollToTarget(id)
+              props.afterClick()
+            }}
+            style={{
+              display: 'block',
+              padding: '6px 20px',
+              color: 'var(--text-secondary)',
+              fontSize: '13px',
+              cursor: 'pointer',
+              transition: 'all 0.15s ease',
+              textDecoration: 'none',
+            }}
+            onMouseEnter={e => {
+              ;(e.target as HTMLElement).style.backgroundColor =
+                'var(--selection-bg)'
+              ;(e.target as HTMLElement).style.color = 'var(--text-accent)'
+            }}
+            onMouseLeave={e => {
+              ;(e.target as HTMLElement).style.backgroundColor = 'transparent'
+              ;(e.target as HTMLElement).style.color = 'var(--text-secondary)'
+            }}
+          >
+            → {id}
+          </a>
+        )
+      })}
+    </div>
   )
 }

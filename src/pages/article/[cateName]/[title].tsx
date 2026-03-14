@@ -7,18 +7,12 @@ import { getArticle } from '@/requests/article'
 import Article from '@/types/Article'
 import Head from 'next/head'
 import ArticleMenu from '@/components/ArticleMenu'
-import { Divider, Drawer } from 'antd'
-import {
-  CalendarOutlined,
-  EyeOutlined,
-  MenuOutlined,
-  UpOutlined,
-} from '@ant-design/icons'
 import dayjs from 'dayjs'
 
 interface IProps {
   article: Article
 }
+
 export const getServerSideProps: GetServerSideProps<IProps> = async context => {
   const params = context.params
 
@@ -44,17 +38,13 @@ export const getServerSideProps: GetServerSideProps<IProps> = async context => {
 
 const ArticleDisplay: NextPage<IProps> = (props: IProps) => {
   const [headings, setHeadings] = useState<Array<HTMLHeadingElement>>([])
-  const [visible, setVisible] = useState(false)
+  const [tocVisible, setTocVisible] = useState(false)
 
-  const showDrawer = () => {
-    setVisible(true)
-  }
-  const onClose = () => {
-    setVisible(false)
-  }
   const backToTop = () => {
     const page = document.getElementsByClassName(style.page)
-    page[0].scrollIntoView({ behavior: 'smooth' })
+    if (page[0]) {
+      page[0].scrollIntoView({ behavior: 'smooth' })
+    }
   }
 
   useEffect(() => {
@@ -65,57 +55,77 @@ const ArticleDisplay: NextPage<IProps> = (props: IProps) => {
   }, [])
 
   const { article } = props
+  const readingMinutes = Math.max(1, Math.floor(article.content.length / 500))
+
   return (
     <>
       <Head>
-        <title>{article.title}</title>
+        <title>{article.title} — foril</title>
         <meta name="description" content={article.description} />
       </Head>
       <div className={style.container}>
         <div className={style.main}>
           <div className={style.page}>
-            <div className={style.heading} onClick={showDrawer}>
-              <h1>{article.title}</h1>
-              <div>
-                <CalendarOutlined /> {dayjs(article.time).format('YYYY-MM-DD')}
-                <Divider type="vertical" />
-                <EyeOutlined /> {article.views || '-'}
+            <div className={style.heading}>
+              <h1 className={style.headingTitle}>{article.title}</h1>
+              <div className={style.headingMeta}>
+                <span className={style.metaItem}>
+                  📅 {dayjs(article.time).format('YYYY-MM-DD')}
+                </span>
+                <span className={style.separator}>|</span>
+                <span className={style.metaItem}>
+                  ⏱ ~{readingMinutes} min read
+                </span>
+                <span className={style.separator}>|</span>
+                <span className={style.metaItem}>#{article.cateName}</span>
               </div>
             </div>
 
-            <Divider plain orientation="right">
-              阅读时间：{Math.floor(article.content.length / 500)}分钟
-            </Divider>
-
             <Markdown>{article?.content}</Markdown>
 
+            {/* Floating action buttons */}
             <div className={style.levBox}>
               <div className={style.roundContainer} onClick={backToTop}>
-                <UpOutlined />
+                ↑
               </div>
               <div
                 className={style.roundContainer}
-                onClick={() => setVisible(true)}
+                onClick={() => setTocVisible(true)}
               >
-                <MenuOutlined />
+                ≡
               </div>
             </div>
           </div>
         </div>
-        {/* 回到顶端 */}
-        <Drawer
-          title="文章目录"
-          placement="right"
-          onClose={onClose}
-          open={visible}
+
+        {/* TOC Drawer - replaces Ant Design Drawer */}
+        <div
+          className={`${style.tocOverlay} ${
+            tocVisible ? style.tocOverlayVisible : ''
+          }`}
+          onClick={() => setTocVisible(false)}
+        />
+        <div
+          className={`${style.tocDrawer} ${
+            tocVisible ? style.tocDrawerVisible : ''
+          }`}
         >
-          <ArticleMenu
-            headings={headings}
-            afterClick={() => {
-              setVisible(false)
-            }}
-          />
-        </Drawer>
+          <div className={style.tocHeader}>
+            <span>$ tree --headings</span>
+            <span
+              className={style.tocClose}
+              onClick={() => setTocVisible(false)}
+            >
+              ✕
+            </span>
+          </div>
+          <div className={style.tocList}>
+            <ArticleMenu
+              headings={headings}
+              afterClick={() => setTocVisible(false)}
+            />
+          </div>
+        </div>
       </div>
     </>
   )

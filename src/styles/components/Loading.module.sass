@@ -4,49 +4,43 @@
   display: flex
   align-items: center
   justify-content: center
+  flex-direction: column
+  gap: 16px
 
+.text
+  color: var(--text-accent)
+  font-size: 14px
+  &::after
+    content: '|'
+    animation: blink 0.8s infinite
 
-  & span
-    width: 20px
-    height: 20px
-    margin: 0 10px
-    border-radius: 50%
-    background-color: var(--theme-color)
-    /* 设置动画 */
-    animation: animate 0.5s linear infinite
+.dots
+  display: flex
+  gap: 8px
 
+.dot
+  width: 8px
+  height: 8px
+  border-radius: 50%
+  background-color: var(--text-accent)
+  animation: pulse 1s ease-in-out infinite
 
-  & span:nth-child(1)
-    animation-delay: 0s
+.dot:nth-child(2)
+  animation-delay: 0.15s
 
+.dot:nth-child(3)
+  animation-delay: 0.3s
 
-  & span:nth-child(2)
-    animation-delay: 0.1s
-
-
-  & span:nth-child(3)
-    animation-delay: 0.2s
-
-
-  & span:nth-child(4)
-    animation-delay: 0.3s
-
-
-  & span:nth-child(5)
-    animation-delay: 0.4s
-
-@keyframes animate
-  0%
-    box-shadow: 0 0 0 rgba(0, 0, 0, .5)
-    opacity: 0
-    transform: translateX(-10px) scale(1)
-
+@keyframes pulse
+  0%, 100%
+    opacity: 0.3
+    transform: scale(0.8)
   50%
-    box-shadow: 0 20px 20px rgba(0, 0, 0, .5)
     opacity: 1
-    transform: translateX(0) scale(1.2)
+    transform: scale(1.2)
 
-  100%
-    box-shadow: 0 0 0 rgba(0, 0, 0, .5)
+@keyframes blink
+  0%, 50%
+    opacity: 1
+  51%, 100%
     opacity: 0
-    transform: translateX(10px) scale(1)
