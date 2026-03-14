@@ -3,8 +3,44 @@
   min-height: 100%
   max-width: 860px
   margin: 0 auto
+  overflow: auto
+
+// ASCII Art 大字标题区域
+.asciiHeader
+  text-align: center
+  margin-bottom: 20px
+  padding: 24px 0 16px
+  border-bottom: 1px dashed var(--border-color)
+  overflow-x: auto
+
+.asciiArt
+  font-size: 14px
+  line-height: 1.15
+  color: var(--text-accent)
+  white-space: pre
+  margin: 0
+  display: inline-block
+
+// 终端命令行提示
+.commandLine
+  color: var(--text-muted)
+  font-size: 12px
+  margin-bottom: 16px
+
+.prompt
+  color: var(--prompt-color)
+  font-weight: 600
 
 @media (max-width: 768px)
   .container
     padding: 16px 12px
+  .asciiHeader
+    padding: 16px 0 12px
+    margin-bottom: 16px
+  .asciiArt
+    font-size: 10px
+    line-height: 1.1
 
+@media (max-width: 380px)
+  .asciiArt
+    font-size: 8px
