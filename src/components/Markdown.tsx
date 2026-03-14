@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { ReactMarkdownOptions } from 'react-markdown/lib/react-markdown'
 import rehypeRaw from 'rehype-raw'
@@ -10,8 +10,40 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { dracula as draculaTheme } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
 /**
+ * 代码块复制按钮组件
+ * 点击后复制代码到剪贴板，显示 ✓ copied 反馈
+ */
+function CopyButton({ code }: { code: string }) {
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(code)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {
+      // fallback
+      const textarea = document.createElement('textarea')
+      textarea.value = code
+      document.body.appendChild(textarea)
+      textarea.select()
+      document.execCommand('copy')
+      document.body.removeChild(textarea)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    }
+  }, [code])
+
+  return (
+    <button className={styles.copyBtn} onClick={handleCopy} title="复制代码">
+      {copied ? '✓ copied' : '[copy]'}
+    </button>
+  )
+}
+
+/**
  * Markdown 渲染组件
- * 支持 GFM、数学公式 (KaTeX)、代码高亮 (Dracula 主题)、iframe 嵌入等
+ * 支持 GFM、数学公式 (KaTeX)、代码高亮 (Dracula 主题)、复制按钮、iframe 嵌入等
  */
 const Markdown = (props: ReactMarkdownOptions) => (
   <div className={styles.markdownContainer}>
@@ -77,9 +109,11 @@ const Markdown = (props: ReactMarkdownOptions) => (
           />
         ),
 
-        // 代码块：行内用 <code>，块级用 SyntaxHighlighter
+        // 代码块：行内用 <code>，块级用 SyntaxHighlighter + 复制按钮
         code({ inline, className, children, ...rest }) {
           const lang = /language-(\w+)/.exec(className || '')?.[1]
+          const codeString = String(children).replace(/\n$/, '')
+
           return inline ? (
             <code
               className={`${className || ''} ${styles.codeInline}`}
@@ -88,16 +122,23 @@ const Markdown = (props: ReactMarkdownOptions) => (
               {children}
             </code>
           ) : (
-            <SyntaxHighlighter
-              className={styles.codeDiv}
-              // @ts-ignore — style 类型不兼容但功能正常
-              style={draculaTheme}
-              language={lang || ''}
-              PreTag="div"
-              {...rest}
-            >
-              {String(children).replace(/\n$/, '')}
-            </SyntaxHighlighter>
+            <div className={styles.codeBlockWrapper}>
+              {/* 代码块头部：语言标签 + 复制按钮 */}
+              <div className={styles.codeBlockHeader}>
+                <span className={styles.codeLang}>{lang || 'code'}</span>
+                <CopyButton code={codeString} />
+              </div>
+              <SyntaxHighlighter
+                className={styles.codeDiv}
+                // @ts-ignore — style 类型不兼容但功能正常
+                style={draculaTheme}
+                language={lang || ''}
+                PreTag="div"
+                {...rest}
+              >
+                {codeString}
+              </SyntaxHighlighter>
+            </div>
           )
         },
 

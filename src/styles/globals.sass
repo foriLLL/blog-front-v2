@@ -33,6 +33,19 @@ body
     &:hover
       background: var(--text-muted)
 
+// CRT 扫描线叠加层 — 若隐若现的复古终端感
+body::after
+  content: ''
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  pointer-events: none
+  z-index: 9999
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.015) 0px, rgba(0, 0, 0, 0.015) 1px, transparent 1px, transparent 3px)
+  opacity: 0.6
+
 a
   color: var(--text-accent)
   text-decoration: none
@@ -44,30 +57,25 @@ a
 ::selection
   background-color: var(--selection-bg)
 
-// Cursor blink animation
+// 光标闪烁动画
 @keyframes blink
   0%, 50%
     opacity: 1
   51%, 100%
     opacity: 0
 
-// Scanline effect for dark mode
-@keyframes scanline
-  0%
-    transform: translateY(-100%)
-  100%
-    transform: translateY(100%)
-
-// Typing animation
-@keyframes typewriter
-  from
-    width: 0
-  to
-    width: 100%
+// 终端光标
+.terminal-cursor
+  display: inline-block
+  width: 8px
+  height: 16px
+  background: var(--cursor-color)
+  animation: blink 1s infinite
+  margin-left: 2px
+  vertical-align: text-bottom
 
 // Mobile responsive adjustments
 @media (max-width: 768px)
   html,
   body
     font-size: 13px
-

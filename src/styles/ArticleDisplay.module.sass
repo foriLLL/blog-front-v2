@@ -10,6 +10,22 @@
   overflow: auto
   padding: 24px
   background-color: transparent
+  position: relative
+
+// ASCII 阅读进度条
+.progressBar
+  position: sticky
+  top: 0
+  z-index: 10
+  padding: 6px 16px
+  background: var(--bg-secondary)
+  border-bottom: 1px solid var(--border-subtle)
+  font-size: 11px
+  backdrop-filter: blur(8px)
+
+.progressText
+  color: var(--text-accent)
+  letter-spacing: 1px
 
 .page
   padding: 40px

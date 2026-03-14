@@ -9,6 +9,7 @@ import Head from 'next/head'
 import ArticleMenu from '@/components/ArticleMenu'
 import dayjs from 'dayjs'
 import { READING_SPEED } from '@/constants/site'
+import { useReadingProgress } from '@/hooks/useEffects'
 
 interface ArticlePageProps {
   article: Article
@@ -24,6 +25,16 @@ export const getServerSideProps: GetServerSideProps<
   return article ? { props: { article } } : { notFound: true }
 }
 
+/** 生成 ASCII 进度条 */
+function asciiProgressBar(progress: number) {
+  const total = 20
+  const filled = Math.round((progress / 100) * total)
+  const empty = total - filled
+  const bar = '█'.repeat(filled) + '░'.repeat(empty)
+  const label = progress >= 100 ? 'EOF' : `${progress}%`
+  return `[${bar}] ${label}`
+}
+
 /**
  * 文章详情页
  * 展示 Markdown 正文，支持浮动操作按钮（回到顶部、打开目录）和侧滑 TOC 抽屉
@@ -31,6 +42,9 @@ export const getServerSideProps: GetServerSideProps<
 export default function ArticlePage({ article }: ArticlePageProps) {
   const [headings, setHeadings] = useState<HTMLHeadingElement[]>([])
   const [tocVisible, setTocVisible] = useState(false)
+
+  // 阅读进度（基于 .main 容器的滚动）
+  const progress = useReadingProgress(`.${style.main}`)
 
   // 预估阅读时间（至少 1 分钟）
   const readingMinutes = Math.max(
@@ -48,9 +62,8 @@ export default function ArticlePage({ article }: ArticlePageProps) {
 
   /** 平滑滚动到页面顶部 */
   const backToTop = () => {
-    document
-      .querySelector(`.${style.page}`)
-      ?.scrollIntoView({ behavior: 'smooth' })
+    const main = document.querySelector(`.${style.main}`)
+    main?.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   return (
@@ -62,6 +75,13 @@ export default function ArticlePage({ article }: ArticlePageProps) {
 
       <div className={style.container}>
         <div className={style.main}>
+          {/* ASCII 阅读进度条 */}
+          <div className={style.progressBar}>
+            <span className={style.progressText}>
+              {asciiProgressBar(progress)}
+            </span>
+          </div>
+
           <div className={style.page}>
             {/* 文章标题和元信息 */}
             <div className={style.heading}>

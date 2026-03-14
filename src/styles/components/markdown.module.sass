@@ -51,11 +51,48 @@
   table
     margin-bottom: 1rem
 
-  .codeDiv
+  // 代码块包裹容器
+  .codeBlockWrapper
+    position: relative
+    margin: 12px 0
     border-radius: 6px
+    overflow: hidden
+    border: 1px solid var(--border-subtle)
+
+  // 代码块头部（语言标签 + 复制按钮）
+  .codeBlockHeader
+    display: flex
+    justify-content: space-between
+    align-items: center
+    padding: 4px 12px
+    background: #1e1f29
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05)
+    font-size: 11px
+
+  .codeLang
+    color: #6272a4
+    text-transform: uppercase
+    letter-spacing: 1px
+
+  .copyBtn
+    background: none
+    border: 1px solid #44475a
+    color: #6272a4
+    font-family: inherit
+    font-size: 11px
+    padding: 2px 8px
+    border-radius: 3px
+    cursor: pointer
+    transition: all 0.15s ease
+    &:hover
+      color: #50fa7b
+      border-color: #50fa7b
+
+  .codeDiv
+    border-radius: 0 !important
     max-width: 100%
     overflow: auto
-    margin: 12px 0
+    margin: 0 !important
     font-size: 13px
 
   .codeInline

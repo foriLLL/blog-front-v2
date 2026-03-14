@@ -12,13 +12,63 @@
   color: var(--text-secondary)
   font-size: 12px
   margin-bottom: 20px
-  .prompt
-    color: var(--prompt-color)
-    font-weight: 600
+
+.prompt
+  color: var(--prompt-color)
+  font-weight: 600
+  margin-right: 6px
+
+// 搜索栏
+.searchLine
+  display: flex
+  align-items: center
+  gap: 0
+  margin-bottom: 16px
+  padding: 8px 12px
+  background: var(--bg-card)
+  border: 1px solid var(--border-subtle)
+  border-radius: 4px
+  font-size: 13px
+  color: var(--text-secondary)
+  transition: border-color 0.2s
+  &:focus-within
+    border-color: var(--text-accent)
+
+.searchPrefix
+  white-space: nowrap
+  color: var(--text-muted)
+  font-size: 12px
+
+.searchInput
+  flex: 1
+  border: none
+  outline: none
+  background: transparent
+  color: var(--text-primary)
+  font-family: inherit
+  font-size: 13px
+  padding: 0 4px
+  min-width: 60px
+  &::placeholder
+    color: var(--text-muted)
+    opacity: 0.6
+
+// 无搜索结果
+.noResult
+  padding: 40px 20px
+  text-align: center
+  color: var(--text-muted)
+  font-size: 13px
 
 @media (max-width: 768px)
   .container
     padding: 16px 12px
   .commandLine
     font-size: 11px
-
+  .searchLine
+    font-size: 11px
+    padding: 6px 10px
+  .searchInput
+    font-size: 12px
+  .searchPrefix
+    font-size: 11px
