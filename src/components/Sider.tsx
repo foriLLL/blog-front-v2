@@ -8,13 +8,21 @@ import { LOGO_ASCII } from '@/constants/ascii'
 
 interface SiderProps {
   articleCates: ArticleCate[]
+  onToggleTheme: () => void
+  themeIcon: string
+  themeLabel: string
 }
 
 /**
  * 侧边栏组件（桌面端显示）
- * 包含终端标题栏、ASCII Art Logo、社交链接、导航菜单和分类列表
+ * 包含终端标题栏、ASCII Art Logo、社交链接、导航菜单、分类列表和主题切换
  */
-const Sider = ({ articleCates }: SiderProps) => {
+const Sider = ({
+  articleCates,
+  onToggleTheme,
+  themeIcon,
+  themeLabel,
+}: SiderProps) => {
   const router = useRouter()
   const [cateOpen, setCateOpen] = useState(true)
 
@@ -97,6 +105,12 @@ const Sider = ({ articleCates }: SiderProps) => {
           </div>
         </div>
       </nav>
+
+      {/* 主题切换按钮 */}
+      <div className={style.themeToggle} onClick={onToggleTheme}>
+        <span>{themeIcon}</span>
+        <span className={style.themeLabel}>theme: {themeLabel}</span>
+      </div>
     </div>
   )
 }

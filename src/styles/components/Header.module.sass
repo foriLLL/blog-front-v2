@@ -64,9 +64,20 @@
 .nickname
   color: var(--text-muted)
   font-size: 11px
-  margin-left: auto
   flex-shrink: 0
-  padding-left: 12px
+  padding-left: 4px
+
+// 主题切换按钮（移动端导航栏）
+.themeBtn
+  flex-shrink: 0
+  margin-left: auto
+  padding: 4px 8px
+  cursor: pointer
+  font-size: 14px
+  user-select: none
+  transition: transform 0.2s ease
+  &:hover
+    transform: scale(1.2)
 
 @media (max-width: 480px)
   .nav

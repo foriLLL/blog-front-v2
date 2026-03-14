@@ -7,13 +7,15 @@ import { NAV_ITEMS, SITE_NAME } from '@/constants/site'
 
 interface HeaderProps {
   articleCates: ArticleCate[]
+  onToggleTheme: () => void
+  themeIcon: string
 }
 
 /**
  * 移动端顶部导航栏（桌面端隐藏）
  * 替代侧边栏的功能，以终端标签栏形式展示导航和分类
  */
-const Header = ({ articleCates }: HeaderProps) => {
+const Header = ({ articleCates, onToggleTheme, themeIcon }: HeaderProps) => {
   const router = useRouter()
 
   // 合并固定导航项和动态分类项
@@ -45,6 +47,10 @@ const Header = ({ articleCates }: HeaderProps) => {
           </Link>
         ))}
       </nav>
+      {/* 主题切换按钮 */}
+      <span className={style.themeBtn} onClick={onToggleTheme}>
+        {themeIcon}
+      </span>
       <span className={style.nickname}>{SITE_NAME}</span>
     </div>
   )
