@@ -1,5 +1,5 @@
 import style from '@/styles/frame.module.sass'
-import type { AppProps } from 'next/app'
+import App, { AppContext, AppProps } from 'next/app'
 import '@/styles/globals.sass'
 import Sider from '@/components/Sider'
 import Header from '@/components/Header'
@@ -16,16 +16,15 @@ import { useTheme } from '@/hooks/useTheme'
  * 应用根组件
  * 负责全局布局（侧边栏 + Header + 内容区）、路由加载状态、分类数据获取、主题切换
  */
-function MyApp({ Component, pageProps }: AppProps) {
-  const [articleCates, setArticleCates] = useState<ArticleCate[]>([])
+
+function MyApp({
+  Component,
+  pageProps,
+  articleCates = [],
+}: AppProps & { articleCates: ArticleCate[] }) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const { toggleTheme, themeIcon, themeLabel } = useTheme()
-
-  // 获取文章分类列表（客户端）
-  useEffect(() => {
-    getAllArticleCates().then(setArticleCates)
-  }, [])
 
   // 监听路由切换，显示/隐藏加载动画
   useEffect(() => {
@@ -79,6 +78,12 @@ function MyApp({ Component, pageProps }: AppProps) {
       </div>
     </>
   )
+}
+
+MyApp.getInitialProps = async (appContext: AppContext) => {
+  const appProps = await App.getInitialProps(appContext)
+  const articleCates = await getAllArticleCates()
+  return { ...appProps, articleCates }
 }
 
 export default MyApp
