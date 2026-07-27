@@ -1,8 +1,10 @@
 import ArticleInfo from '@/types/ArticleInfo'
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import PostItem from './PostItem'
 import TypewriterText from './TypewriterText'
 import style from '@/styles/components/PostList.module.sass'
+import { isPopNavigation } from '@/utils/scrollMemory'
 
 interface PostListProps {
   articleInfos: ArticleInfo[]
@@ -10,14 +12,31 @@ interface PostListProps {
   cateName?: string
 }
 
+const SEARCH_KEY_PREFIX = 'blog:search:'
+
 /**
  * 文章列表组件
  * 以终端 `ls` 命令的输出形式展示文章摘要列表
  * 支持前端模糊搜索（标题 + 描述）
  */
 export default function PostList({ articleInfos, cateName }: PostListProps) {
+  const router = useRouter()
   const [searchQuery, setSearchQuery] = useState('')
   const dirPath = cateName ? `~/posts/${cateName}/` : '~/posts/'
+
+  // 从文章页通过浏览器返回（popstate）时，恢复离开前输入的搜索关键词
+  useEffect(() => {
+    if (!isPopNavigation()) return
+    const saved = sessionStorage.getItem(SEARCH_KEY_PREFIX + router.asPath)
+    if (saved) setSearchQuery(saved)
+    // 仅在挂载时恢复一次
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // 关键词变化时持久化，供返回列表时恢复
+  useEffect(() => {
+    sessionStorage.setItem(SEARCH_KEY_PREFIX + router.asPath, searchQuery)
+  }, [searchQuery, router.asPath])
 
   // 根据搜索关键词过滤文章（模糊匹配标题和描述）
   const filteredInfos = useMemo(() => {

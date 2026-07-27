@@ -11,6 +11,15 @@ import { getAllArticleCates } from '@/requests/articleCate'
 import ArticleCate from '@/types/ArticleCate'
 import { SITE_TITLE, SITE_DESCRIPTION } from '@/constants/site'
 import { useTheme } from '@/hooks/useTheme'
+import {
+  SCROLL_ROOT_ID,
+  markPopNavigation,
+  isPopNavigation,
+  saveScrollPosition,
+  getCurrentScrollTop,
+  getSavedScrollPosition,
+  restoreScrollPosition,
+} from '@/utils/scrollMemory'
 
 /**
  * 应用根组件
@@ -42,6 +51,68 @@ function MyApp({
     }
   }, [router])
 
+  // 记忆滚动位置：滚动时按路径持续保存，浏览器前进/后退返回时恢复
+  useEffect(() => {
+    // 关闭浏览器原生滚动恢复，避免与手动恢复互相打架
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual'
+    }
+
+    // 必须滚动时持续保存，而不能等 routeChangeStart 再读：
+    // 该事件触发后 Loading 动画会同步卸载列表，滚动位置已被钳制为 0
+    let scrollTicking = false
+    const handleScroll = (event: Event) => {
+      const target = event.target
+      if (!(target instanceof HTMLElement)) return
+      if (!document.getElementById(SCROLL_ROOT_ID)?.contains(target)) return
+      const top = target.scrollTop
+      if (scrollTicking) return
+      scrollTicking = true
+      requestAnimationFrame(() => {
+        scrollTicking = false
+        saveScrollPosition(router.asPath, top)
+      })
+    }
+    const handleUnload = () =>
+      saveScrollPosition(router.asPath, getCurrentScrollTop())
+    const handleRestore = (url: string) => {
+      if (!isPopNavigation()) return
+      const y = getSavedScrollPosition(url)
+      if (y === null) return
+      // 等 Next 完成路由提交和本帧渲染后再恢复
+      requestAnimationFrame(() => restoreScrollPosition(y))
+    }
+
+    // scroll 不冒泡但捕获阶段可达，用委托监听内容区里所有滚动容器
+    document.addEventListener('scroll', handleScroll, {
+      capture: true,
+      passive: true,
+    })
+    router.events.on('routeChangeComplete', handleRestore)
+    window.addEventListener('beforeunload', handleUnload)
+    router.beforePopState(() => {
+      markPopNavigation()
+      return true
+    })
+
+    // 整页刷新时恢复刷新前的位置
+    const navEntry = performance.getEntriesByType('navigation')[0] as
+      | PerformanceNavigationTiming
+      | undefined
+    if (navEntry?.type === 'reload') {
+      const y = getSavedScrollPosition(router.asPath)
+      if (y !== null) {
+        requestAnimationFrame(() => restoreScrollPosition(y))
+      }
+    }
+
+    return () => {
+      document.removeEventListener('scroll', handleScroll, { capture: true })
+      router.events.off('routeChangeComplete', handleRestore)
+      window.removeEventListener('beforeunload', handleUnload)
+    }
+  }, [router])
+
   return (
     <>
       <Head>
@@ -70,8 +141,8 @@ function MyApp({
               themeIcon={themeIcon}
             />
           </div>
-          {/* 页面内容区 */}
-          <div className={style.component}>
+          {/* 页面内容区（全站唯一的滚动容器，id 供滚动位置记忆使用） */}
+          <div id="page-scroll-container" className={style.component}>
             {loading ? <Loading /> : <Component {...pageProps} />}
           </div>
         </div>
